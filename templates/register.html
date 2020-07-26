@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <form action="/home" method="post">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Name</label>
+            <input name="name" type="text" class="form-control" id="formGroupExampleInput">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput">Email</label>
+            <input name="email" type="text" class="form-control" id="formGroupExampleInput">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">Surname</label>
+            <input name="surname" type="text" class="form-control" id="formGroupExampleInput2">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">City</label>
+            <input name="city" type="text" class="form-control" id="formGroupExampleInput2">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2">PIN</label>
+            <input name="pin" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Postal PIN code">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
