@@ -1,2 +1,2 @@
 # flask-playground
-A Flask web app playground for learning the framework
+A Flask web app coding playground for my learning of the framework
