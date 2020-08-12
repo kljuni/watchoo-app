@@ -1,0 +1,37 @@
+/* #myCarousel.inner-carousel {
+    height: 50rem;
+} */
+
+.img_bg {
+    background-color: white;
+    width: 93px;
+}
+
+.img-watch {
+    max-height: 300px;
+    width: auto;
+}
+
+.carousel-inner {
+    height: 300px;
+}
+
+#myCarousel .carousel-indicators {
+    position: static;
+    left: initial;
+    width: initial;
+    height: 70px;
+}
+#myCarousel .carousel-indicators img {
+    height: 70px;
+}
+
+#myCarousel .carousel-indicators > li {
+    width: initial;
+    height: initial;
+    text-indent: initial;
+}
+
+#myCarousel .carousel-indicators > li.active img {
+    opacity: 0.7;
+}

@@ -1,0 +1,35 @@
+{
+  "name": "flask-data-visualization",
+  "version": "1.0.0",
+  "description": "Adding ReactJS components to a Flask app",
+  "main": "static/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack -p --progress --config webpack.config.js",
+    "dev-build": "webpack --progress -d --config webpack.config.js",
+    "watch": "webpack --progress -d --config webpack.config.js --watch"
+  },
+  "author": "Ivan Kljun",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.2.1",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-dropzone-uploader": "^2.11.0"
+  }
+}

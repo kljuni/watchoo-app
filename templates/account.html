@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block body %}
+<div id="accordion" class="mt-4">
+    <div class="card">
+      <div class="card-header" id="headingOne">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            General account settings
+          </button>
+        </h5>
+      </div>
+  
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div class="container p-3">
+            <form>
+                <div class="form-group col-md-6">
+                    <label for="inputFM">First Name</label>
+                    <input type="text" class="form-control" id="inputFM">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputSM">Last Name</label>
+                    <input type="text" class="form-control" id="inputSM">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" class="form-control" id="inputEmail">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputCountry">Country</label>
+                    <select id="inputCountry" class="form-control selectpicker" onfocus='this.size=5;'>
+                        <option>Choose...</option>
+                        {% for el in countryList %}
+                        <option value="{{ el }}">{{ el }}</option>   
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="container">
+                    <button type="submit" class="btn btn-primary float-right m-3">Save</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            Change password
+          </button>
+        </h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+        <div class="container p-3">
+          <form>
+              <div class="form-group">
+              <input type="password" class="form-control col-md-6" id="exampleInputPassword1" placeholder="Current password">
+              </div>
+              <div class="form-group">
+                  <small>Take care to enter your new password correctly!</small>
+                  <input name="password1" type="password" class="form-control col-md-6" id="formGroupExampleInput4" placeholder="New password" required>                    
+                  <div class="form-group">
+                      <div class="form-check">
+                          <a onchange="seePass()">
+                              <input type="checkbox" id="Check1">
+                              <label class="form-check-label"  for="Check1">
+                              Show Password
+                              </label>
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="container">
+                <button type="submit" class="btn btn-primary float-right m-3">Save</button>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingThree">
+        <h5 class="mb-0">
+          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+            Collapsible Group Item #3
+          </button>
+        </h5>
+      </div>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+        <div class="card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <script>
+        function seePass() {
+        var x = document.getElementById("formGroupExampleInput4");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+            }
+    </script>
+
+{% endblock %}

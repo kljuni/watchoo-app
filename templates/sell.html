@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="/static/shop.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <h2 class="text-center" style="color:red;">{{ msg }}</h2>
+    <div class="row justify-content-md-center mt-4">
+        <div class="list-group col-md-8">
+            <h2 class="mb-4">Watch details</h2>
+                <form action="/sell" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Brand:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <select name="brand" id="inputCountry" class="form-control selectpicker align-middle" onfocus='this.size=5;'>
+                                    <option>Choose...</option>
+                                    {% for el in watchBrands %}
+                                    <option value="{{ el }}">{{ el }}</option>   
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Model:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <input name="model" type="text" class="form-control" id="inputM">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Condition:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <select name="condition" class="form-control" id="exampleFormControlSelect1">
+                                    <option selected disabled>Please choose</option>
+                                    <option>Unworn (Mint condition, without signs of wear) </option>
+                                    <option>Good (Light signs of wear or scratches)</option>
+                                    <option>Fair (Obvious signs of wear or scratches)</option>
+                                    <option>Poor (Heavy signs of wear or scratches)</option>
+                                    <option>Incomplete (Components missing, non-functional)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Gender:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <select name="gender" class="form-control" id="exampleFormControlSelect1">
+                                    <option selected disabled>Please choose</option>
+                                    <option>Men's watch/Unisex</option>
+                                    <option>Women's watch</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Year:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <input name="year" type="number" class="form-control" id="inputM">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Movement:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <select name="movement" class="form-control" id="exampleFormControlSelect1">
+                                    <option selected disabled>Please choose</option>
+                                    <option>Automatic</option>
+                                    <option>Manual winding</option>
+                                    <option>Quartz</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Price:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <input name="price" type="number" class="form-control" id="inputM">
+                            </div>
+                        </div>
+                    </div>
+                                    
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-2 justify-content-md-end d-flex align-items-center">
+                                <b class="my-0">Description:</b>
+                            </div>
+                            <div class="col-md-10">
+                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            </div>
+                        </div>
+                    </div>       
+                    
+                    <div name="file" id="react-root"></div>
+
+                    <!-- <div class="file-upload-wrapper">
+                        <input type="file" name="file" id="input-file-now-custom-2" class="file-upload" 
+                        data-height="100" accept="image/x-png,image/gif,image/jpeg"/>
+                    </div> -->
+
+                    <!-- <div class="col-md-10 float-right">
+                        <div class="uploader__box js-uploader__box">
+                                <div class="uploader__contents">
+                                    <label class="button button--secondary" for="fileinput">Select Files</label>
+                                    <input id="fileinput" class="uploader__file-input" type="file" multiple value="Select Files">
+                                </div>
+                        </div>
+                    </div> -->
+
+                    <div class="container">
+                        <button type="submit" class="btn btn-primary float-right m-3">Save details and continue</button>
+                    </div>
+                </form>
+        </div>
+    </div>
+
+    <!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="/static/jquery.imageuploader.js"></script> -->
+    <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
+    <!-- <script> 
+  
+        // var options = {};
+        // $('.js-uploader__box').uploader(options);
+        // var options = {
+        //     instructionsCopy: 'Drag and Drop, or',
+        //     furtherInstructionsCopy: 'Your can also drop more files, or',
+        //     selectButtonCopy: 'Select Files',
+        //     secondarySelectButtonCopy: 'Select More Files',
+        //     dropZone: $(this),
+        //     fileTypeWhiteList: ['jpg', 'png', 'jpeg', 'gif'],
+        //     badFileTypeMessage: 'Sorry, we\'re unable to accept this type of file.',
+        //     ajaxUrl: '/ajax/upload',
+        //     testMode: false
+        // };
+        
+        // // $(function(){
+        // //     $("input[type='submit']").click(function(){
+        // //         var $fileUpload = $("input[type='file']");
+        // //         if (parseInt($fileUpload.get(0).files.length)>5){
+        // //         alert("You can only upload a maximum of 5 images");
+        // //         }
+        // //     });    
+        // // });​
+    </script> -->
+
+{% endblock %}
+

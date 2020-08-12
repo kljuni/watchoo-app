@@ -1,0 +1,40 @@
+/* // Extra small devices (portrait phones, less than 576px) */
+/* // No media query since this is the default in Bootstrap */
+
+.list-group-item {
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+}
+
+.left-top-corner {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    width: 50%;
+}
+   
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .h-oglas {
+        max-height: 14rem !important;
+    }
+    .display-pic {
+        max-height: 10rem !important;
+    }
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) { 
+    .navbar-nav.navbar-center {
+        position: absolute; 
+        left: 50%; 
+        transform: translatex(-50%); 
+    }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {}

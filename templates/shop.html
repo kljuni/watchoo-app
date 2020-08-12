@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="/static/shop.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    
+    <div class="row justify-content-md-center mt-4">
+        <div class="list-group col-md-8">
+            <a href="{{ url_for('watch', item_id = 12) }}" class="list-group-item list-group-item-action align-items-start h-oglas">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/omega.jpg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">OMEGA Speedmaster 311</h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ptuj, Štajerska.</p>
+                        <p class="card-text"><small class="text-muted">19. 7. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+            <a action="/watch" class="list-group-item list-group-item-action align-items-start h-oglas mt-2">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/fossil.jpeg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">Fossil BQ2125 FLYNN </h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ljubljana, Osrednjeslovenska.</p>
+                        <p class="card-text"><small class="text-muted">10. 5. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action align-items-start h-oglas mt-2">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/omega.jpg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">OMEGA Speedmaster 311</h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ptuj, Štajerska.</p>
+                        <p class="card-text"><small class="text-muted">19. 7. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action align-items-start h-oglas mt-2">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/fossil.jpeg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">Fossil BQ2125 FLYNN </h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ljubljana, Osrednjeslovenska.</p>
+                        <p class="card-text"><small class="text-muted">10. 5. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+            <br>
+        </div>
+    </div>
+    <!-- <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="..." class="img-fluid" alt="Responsive image">
+          </div>
+          
+        </div>
+      </div>
+
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="..." class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+{% endblock %}

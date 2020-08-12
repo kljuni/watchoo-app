@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block head %}
+    <link href="/static/shop.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <h2 class="text-center my-4">
+        Hello "username"!
+    </h2>
+    <h4 class="text-center mb-2">
+        Check out the new listings!
+    </h4>
+    <div class="row justify-content-md-center mt-4">
+        <div class="list-group col-md-8">
+            <a href="#" class="list-group-item list-group-item-action align-items-start h-oglas">
+                <img src="/static/images/newlisting.png" class="left-top-corner" alt="New listing">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/omega.jpg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">OMEGA Speedmaster 311</h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ptuj, Štajerska.</p>
+                        <p class="card-text"><small class="text-muted">19. 7. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action align-items-start h-oglas mt-2">
+                <img src="/static/images/newlisting.png" class="left-top-corner" alt="New listing">
+                <div class="row">
+                    <div class="col-3 text-center">
+                        <img src="/static/images/fossil.jpeg" class="img-fluid display-pic" alt="Responsive image">
+                    </div>
+                    <div class="col-9">
+                        <h5 class="card-title">Fossil BQ2125 FLYNN </h5>
+                        <hr class="my-2">
+                        <p class="card-text">Ljubljana, Osrednjeslovenska.</p>
+                        <p class="card-text"><small class="text-muted">10. 5. 2020</small></p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+{% endblock %}
