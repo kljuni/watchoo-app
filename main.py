@@ -13,7 +13,7 @@ import string
 import math
 
 
-app = Flask(__name__,  static_folder='/', static_url_path='/')
+app = Flask(__name__)
 
 
 # from blueprints import main
@@ -377,4 +377,5 @@ def about():
     return "<h1>About Page</h1>"
     
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
+    app.run(debug=True)
+
