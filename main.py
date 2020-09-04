@@ -13,7 +13,7 @@ import string
 import math
 
 
-app = Flask(__name__)
+app = Flask(__name__,  static_folder='/', static_url_path='/')
 
 
 # from blueprints import main
