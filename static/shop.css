@@ -12,6 +12,39 @@
     z-index: 1;
     width: 50%;
 }
+.cat-link:link {
+    color: black;
+}
+
+.cat-link:visited {
+    color: black;
+}
+
+.cat-link:hover {
+    color: #0056b3;
+}
+.btn {
+    text-align: left;
+}
+
+
+.btn-link {
+    color: black;
+}
+
+.btn-link.focus, .btn-link:focus {
+    text-decoration: none;
+    box-shadow: none;
+}
+
+.btn-link:hover {
+    color: #0056b3;
+    text-decoration: none;
+}
+.btn.focus, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
    
 
 /* // Small devices (landscape phones, 576px and up) */
@@ -20,10 +53,10 @@
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
     .h-oglas {
-        max-height: 14rem !important;
+        height: max-content !important;
     }
     .display-pic {
-        max-height: 10rem !important;
+        max-height: 15rem !important;
     }
 }
 
@@ -34,7 +67,76 @@
         left: 50%; 
         transform: translatex(-50%); 
     }
+    .card-header {
+        padding: 0px;
+    }
 }
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
+
+/*
+*
+* ==========================================
+* CUSTOM UTIL CLASSES
+* ==========================================
+*
+*/
+#upload {
+    opacity: 0;
+}
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+
+.image-area {
+    border: 2px dashed rgba(255, 255, 255, 0.7);
+    height: 6rem;
+    width: 6rem;
+    position: relative;
+}
+
+.image-area::before {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.8rem;
+    z-index: 1;
+}
+
+.image-area img {
+    z-index: 2;
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+/*
+*
+* ==========================================
+* FOR DEMO PURPOSES
+* ==========================================
+*
+*/
+body {
+    min-height: 100vh;
+    background-color: #757f9a;
+    background-image: linear-gradient(147deg, #757f9a 0%, #d7dde8 100%);
+}
+
+/*

@@ -59,9 +59,6 @@
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
-.h-oglas {
-    max-height: 10rem;
-}
 }
 
 /* // Large devices (desktops, 992px and up) */
@@ -75,3 +72,66 @@
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}
+
+
+/* Down is the sideNav css */
+@media only screen and (max-width: 991px) {
+    #slide-navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        width: 25%;
+        height: 100%;
+        background-color: #ffffff;
+        overflow: auto;
+        -webkit-box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+        box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+    }
+    .menu-overlay {
+        display: none;
+        background-color: #000;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        filter: alpha(opacity=50);
+        /* IE7 & 8 */
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 49;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    #slide-navbar-collapse {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 99;
+        width: 50%;
+        height: 100%;
+        background-color: #ffffff;
+        overflow: auto;
+        -webkit-box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+        -moz-box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+        box-shadow: inset 4px 0px 7px -5px rgba(0,0,0,0.75);
+    }
+    .menu-overlay {
+        display: none;
+        background-color: #000;
+        bottom: 0;
+        left: 0;
+        opacity: 0;
+        filter: alpha(opacity=50);
+        /* IE7 & 8 */
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 49;
+    }
+  }
+
+
+  

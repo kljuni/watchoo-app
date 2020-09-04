@@ -2,59 +2,65 @@
 
 {% block head %}
     <link href="/static/watch.css" rel="stylesheet">
+    <link href="/static/shop.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
 
     <div class="row mt-5">
         <div class="col-lg-6" id="slider">
+            
+            
             <div id="myCarousel" class="carousel slide">
                 <div class="carousel-inner">
-                    <div class="active item carousel-item text-center" data-slide-number="0">
-                        <img src="/static/images/rolexgmt.jpg" class="img-watch">
-                    </div>
-                    <div class="item carousel-item text-center" data-slide-number="1">
-                        <img src="/static/images/rolexgmt2.jpg" class="img-watch">
-                    </div>
-                    <div class="item carousel-item text-center" data-slide-number="2">
-                        <img src="/static/images/rolexgmt3.jpg" class="img-watch">
-                    </div>
+                    {% for row in image %}
+                        {% if loop.index <= 1 %}
+
+                        <div class="active item carousel-item text-center" data-slide-number="{{ loop.index }}">
+                            <img src="{{ row[3] }}" class="img-watch">
+                        </div>                        
+                        {% else %}
+                        <div class="item carousel-item text-center" data-slide-number="{{ loop.index }}">
+                            <img src="{{ row[3] }}" class="img-watch">
+                        </div>
+                        {% endif %}  
+                    {% endfor %}
                     <a class="carousel-control left pt-3" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
                     <a class="carousel-control right pt-3" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-right"></i></a>
                 </div>
                 <div class="text-center">
                     <ul class="carousel-indicators list-inline">
-                        <li class="list-inline-item active">
-                            <div class="img_bg">
-                                <a id="carousel-selector-0" class="selected" data-slide-to="0" data-target="#myCarousel">
-                                    <img src="/static/images/rolexgmt.jpg" class="img-fluid">
-                                </a>
-                            </div>
-                        </li>
-                        <li class="list-inline-item">
-                            <div class="img_bg">
-                                <a id="carousel-selector-1" data-slide-to="1" data-target="#myCarousel">
-                                    <img src="/static/images/rolexgmt2.jpg" class="img-fluid">
-                                </a>
-                            </div>
-                        </li>
-                        <li class="list-inline-item">
-                            <div class="img_bg">   
-                                <a id="carousel-selector-2" data-slide-to="2" data-target="#myCarousel">
-                                    <img src="/static/images/rolexgmt3.jpg" class="img-fluid">
-                                </a>
-                            </div> 
-                        </li>
+                        
+                        {% for row in image %}
+                            {% if loop.index <= 1 %}
+                                <li class="list-inline-item active">
+                                    <div class="img_bg">
+                                        <a id="carousel-selector-{{ loop.index - 1 }}" class="selected" data-slide-to="{{ loop.index - 1 }}" data-target="#myCarousel">
+                                            <img src="{{ row[3] }}" class="img-fluid">
+                                        </a>
+                                    </div>
+                                </li>                       
+                            {% else %}
+                                <li class="list-inline-item">
+                                    <div class="img_bg">
+                                        <a id="carousel-selector-{{ loop.index - 1 }}" class="selected" data-slide-to="{{ loop.index - 1 }}" data-target="#myCarousel">
+                                            <img src="{{ row[3] }}" class="img-fluid">
+                                        </a>
+                                    </div>
+                                </li>
+                            {% endif %}                     
+                        {% endfor %}
                     </ul>
                 </div>            
             </div>
-        </div>
+    </div>
         <div class="col-lg-6">
-            <b>Rolex GMT black II</b>
+            <b>{{ watch[0][1] }} - {{ watch[0][2] }}</b>
+            <br><br>
+            <p>{{ watch[0][3] }}</p>
+            <p>{{ watch[0][8] }}</p>
             <br>
-            <p>This is a very nice watch, it is very accurate.</p>
-            <br>
-            <b>1600 USD</b>
+            <b>{{ watch[0][7] }} €</b>
         </div>        
     </div>
 

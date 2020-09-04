@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, g, request
+from flask import Flask, render_template, session, g, request, jsonify
 from tempfile import mkdtemp
 from flask_session.__init__ import Session
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -10,8 +10,15 @@ import sqlite3 as sql
 import os
 import random
 import string
+import math
+
 
 app = Flask(__name__)
+
+
+# from blueprints import main
+# app.register_blueprint(main)
+
 
 DATABASE = 'mydb.db'
 
@@ -160,9 +167,102 @@ def register():
 def index():
     return render_template("index.html")
 
+@app.route("/search", methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        try:            
+            search = request.form.get("search")
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                items = []
+                list_items = []
+                images = []
+                for row in c.execute("SELECT * FROM items WHERE items.brand LIKE '%'||?||'%' OR items.model LIKE '%'||?||'%' OR items.description LIKE '%'||?||'%' ORDER BY created desc", (search, search, search)):
+                    items.append(list(row))
+                for item in items:
+                    list_items.append(item[0])
+                for item in list_items:
+                    image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
+                    for img in image:
+                        images.append(list(img))
+                return render_template('shop.html', watches=items, images=images, search=search)
+                conn.close()
+        except Exception as e:
+            print(e)
+            conn.rollback()
+            return redirect('/shop')
+            conn.close()
+
 @app.route("/shop")
 def shop():
-    return render_template("shop.html")
+    with sql.connect("mydb.db") as conn:
+        c = conn.cursor()
+        watches = []
+        images = []
+        brands = []
+        for row in c.execute('SELECT * FROM items ORDER BY created desc'):
+            watches.append(list(row))
+        for row in c.execute('SELECT * FROM images ORDER BY date desc'):
+            images.append(list(row))
+        for row in watches: 
+            if row[1] not in brands:
+                brands.append(row[1])
+    return render_template("shop.html", watches=watches, images=images, brands=brands)
+    conn.close()
+
+@app.route("/testing")
+def testing():
+    return render_template("testing.html")
+
+@app.route('/shop/<int:order>/<int:page>')
+def watches_list(order, page):
+    try:
+        with sql.connect("mydb.db") as conn:
+            c = conn.cursor()
+            watches = []
+            images = []
+            brands = []
+            item_ids = []
+
+            # Get number of all listed items by counting all rows in items table
+            num_items = 0
+            for row in c.execute('SELECT COUNT(*) FROM items'):
+                num_items = row[0]
+
+            # Get number of pages by deviding the number of listed items and ceil the result.
+            num_pages = math.ceil(num_items / 12)
+
+            # If requested page does not exist, redirect user to "shop" page
+            if page < 1 or page > num_pages or order < 1 or order > 4:
+                return redirect('/shop')
+            # Select 12 items from items with the offset for the selected page and the selected order
+            if order == 1:
+                for row in c.execute('SELECT * FROM items ORDER BY created desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                    watches.append(list(row))
+            elif order == 2:
+                for row in c.execute('SELECT * FROM items ORDER BY created asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                    watches.append(list(row))
+            elif order == 3:
+                for row in c.execute('SELECT * FROM items ORDER BY price asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                    watches.append(list(row))
+            elif order == 4:
+                for row in c.execute('SELECT * FROM items ORDER BY price desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                    watches.append(list(row))
+            # Populate item_ids with the ids from watches list
+            for row in watches:
+                item_ids.append(row[0])
+            # Select rows from images table if the image is in the watches list (i.e. has the same id as one of the items in watches list)
+            for row in item_ids:
+                for img in c.execute('SELECT * FROM images WHERE item IN (?) ORDER BY date desc', (row,)):
+                    images.append(list(img))
+            num_pages = list(range(1, num_pages + 1))
+        conn.close()
+        return jsonify(watches = watches, images = images, num_pages=num_pages)
+    except Exception as e:
+        print(e)
+        conn.rollback()
+        return redirect('/shop')
+        conn.close()
 
 @app.route("/sell", methods=['GET', 'POST'])
 def sell():
@@ -181,31 +281,57 @@ def sell():
             price = request.form.get("price")
             description = request.form.get("description") 
             created = datetime.now().isoformat()
-        
+            category = request.form.get("category")
+
             with sql.connect("mydb.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, created, item_owner) VALUES (?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, created, session["user_id"]))
-                file_entry = query_db('SELECT last_insert_rowid()')
-                image = request.files['file']
+                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, created, session["user_id"], category))
+                con.commit()
+                file_entry = query_db('SELECT MAX(item_id) FROM items')
+                
+                # Save uploaded image to image. 
+                # Save the uploaded item_id
+                uploaded_files = request.files.getlist("input-fa[]")
+                print(uploaded_files)
+                item_id = [lis[0] for lis in file_entry][0]
+                for image in uploaded_files:
+                    if image:                
+                        # Check if the image has a name
+                        if image.filename == "":
+                            return render_template("/sell.html", msg = "Selected image has no name")
 
-                # flask image upload procedure from https://pythonise.com/series/learning-flask/flask-uploading-files
-                if image:                
-                    # Check if the image has a name
-                    if image.filename == "":
-                        return render_template("/sell.html", msg = "Selected image has no name")
+                        if allowed_image(image.filename):
+                            filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
+    
+                            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
-                    if allowed_image(image.filename):
-                        filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
+
+                        cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
+
+                
+                # # image = request.files['input-fa[]']
+                # # print(image)
+                # item_id = [lis[0] for lis in file_entry][0]
+
+                # # Flask image upload procedure from https://pythonise.com/series/learning-flask/flask-uploading-files
+                # if image:                
+                #     # Check if the image has a name
+                #     if image.filename == "":
+                #         return render_template("/sell.html", msg = "Selected image has no name")
+
+                #     if allowed_image(image.filename):
+                #         filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
   
-                        image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                #         image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
 
-                    cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (1, session["user_id"], created, "/static/images/{}".format(filename)))
+                #     cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
 
             
             con.commit()
 
-            return render_template("watch.html", item_id = 14)
+            # return render_template("watch.html", item_id = item_id)
+            return redirect(url_for('watch', item_id = item_id))
             con.close()
 
         except Exception as e:
@@ -223,7 +349,18 @@ def sell():
                 
 @app.route("/watch/<int:item_id>")
 def watch(item_id):
-    return render_template('watch.html', item_id = item_id)
+    with sql.connect("mydb.db") as conn:
+        c = conn.cursor()
+        watch = []
+        image = []
+        for row in c.execute('SELECT * FROM items WHERE items.item_id == ?', (item_id,)):
+            watch.append(list(row))
+        for row in c.execute('SELECT * FROM images WHERE images.item == ?', (item_id,)):
+            image.append(list(row))
+        print(watch)
+        print(image)
+        return render_template('watch.html', item_id = item_id, watch=watch, image=image)
+        conn.close()
 
 @app.route("/account")
 @login_required

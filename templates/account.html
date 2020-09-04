@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
 {% block head %}
-
+  <link href="/static/shop.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<div id="accordion" class="mt-4">
+  
+
+
+  <div id="accordion" class="mt-4">
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
@@ -102,15 +105,15 @@
     </div>
   </div>
 
-    <script>
-        function seePass() {
-        var x = document.getElementById("formGroupExampleInput4");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-            }
-    </script>
+  <script>
+      function seePass() {
+      var x = document.getElementById("formGroupExampleInput4");
+          if (x.type === "password") {
+              x.type = "text";
+          } else {
+              x.type = "password";
+          }
+          }
+  </script>
 
 {% endblock %}
