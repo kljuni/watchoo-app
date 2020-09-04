@@ -59,7 +59,7 @@ function App() {
             Sorting();
         }
         return (
-          <div className="my-4">
+          <div>
             { showMore ? <Button className="text-center" variant="outline-primary" size="lg" onClick={onClick} block>Show more »</Button> : 
             <Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/> }
           </div>

@@ -22,108 +22,118 @@
         </div>
         {% endif %} -->
 
-        <div id="root" class="list-group col-md-8"></div>
-
-        <div class="col-md-3">
-            <form action="/shop/categories" method="post">
-                <div class="accordion" id="accordionExample">
-                    <div class="card" type="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        <div class="card-header" id="headingOne">
-                            <p class="mb-0">
-                            <span class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                                    <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                  </svg> Gender
-                            </span>
-                        </p>
-                        </div>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
-                            <div class="card-body">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="genderRadio1" name="gender" class="custom-control-input">
-                                    <label class="custom-control-label" for="genderRadio1">Men's/Unisex</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="genderRadio2" name="gender" class="custom-control-input">
-                                    <label class="custom-control-label" for="genderRadio2">Women's</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" type="button" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        <div class="card-header" id="headingTwo">
-                            <h2 class="mb-0">
-                            <span class="btn btn-link collapsed w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tags-fill mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M3 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 7.586 1H3zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                    <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
-                                </svg> Category
-                            </span>
-                            </h2>
-                        </div>
-                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
-                            <div class="card-body">
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio1" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio1">Smartwatch</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio2" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio2">Chronograph</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio3" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio3">GMT watch</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio4" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio4">Diver's watch</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio5">Pilot watch</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio5">Casual</label>
-                                </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
-                                    <label class="custom-control-label" for="categoryRadio5">Dress watch</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card" type="button" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <div class="card-header" id="headingThree">
-                            <h2 class="mb-0">
-                            <span class="btn btn-link collapsed w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-patch-check-fll mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984a.5.5 0 0 0-.708-.708L7 8.793 5.854 7.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
-                                  </svg> Brands
-                            </span>
-                            </h2>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
-                            <div class="card-body">
-                                {% for row in brands %}   
-
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="brandRadio{{ loop.index }}" name="brand" class="custom-control-input">
-                                        <label class="custom-control-label" for="brandRadio{{ loop.index }}">{{ row }}</label>
-                                    </div>
-
-                                {% endfor %}
-                                   
-
-                            </div>
-                        </div>
-                    </div>                
+        <div class="container bg-light">
+            <div class="row">
+                <div class="col-md-9">
+                    <div id="root"></div>
                 </div>
-                <button type="submit" class="btn btn-primary float-right mt-2">Search</button>
-            </form>
+                <div class="col-md-3 mt-3 d-none d-xs-block d-sm-block">
+                        <form action="/shop/categories" method="post">
+                            <div class="accordion" id="accordionExample">
+                                <div class="card" type="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="card-header" id="headingOne">
+                                        <p class="mb-0">
+                                        <span class="btn btn-link w-100" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-square mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path fill-rule="evenodd" d="M2 15v-1c0-1 1-4 6-4s6 3 6 4v1H2zm6-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                              </svg> Gender
+                                        </span>
+                                    </p>
+                                    </div>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                                        <div class="card-body">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="genderRadio1" name="gender" class="custom-control-input">
+                                                <label class="custom-control-label" for="genderRadio1">Men's/Unisex</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="genderRadio2" name="gender" class="custom-control-input">
+                                                <label class="custom-control-label" for="genderRadio2">Women's</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" type="button" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="card-header" id="headingTwo">
+                                        <h2 class="mb-0">
+                                        <span class="btn btn-link collapsed w-100" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-tags-fill mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M3 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 7.586 1H3zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                                                <path d="M1 7.086a1 1 0 0 0 .293.707L8.75 15.25l-.043.043a1 1 0 0 1-1.414 0l-7-7A1 1 0 0 1 0 7.586V3a1 1 0 0 1 1-1v5.086z"/>
+                                            </svg> Category
+                                        </span>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                                        <div class="card-body">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio1" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio1">Smartwatch</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio2" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio2">Chronograph</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio3" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio3">GMT watch</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio4" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio4">Diver's watch</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio5">Pilot watch</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio5">Casual</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio5">Dress watch</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" type="button" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    <div class="card-header" id="headingThree">
+                                        <h2 class="mb-0">
+                                        <span class="btn btn-link collapsed w-100" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-patch-check-fll mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01-.622-.636zm.287 5.984a.5.5 0 0 0-.708-.708L7 8.793 5.854 7.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                                              </svg> Brands
+                                        </span>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
+                                        <div class="card-body">
+                                            {% for row in brands %}   
+            
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="brandRadio{{ loop.index }}" name="brand" class="custom-control-input">
+                                                    <label class="custom-control-label" for="brandRadio{{ loop.index }}">{{ row }}</label>
+                                                </div>
+            
+                                            {% endfor %}
+                                               
+            
+                                        </div>
+                                    </div>
+                                </div>                
+                            </div>
+                            <button type="submit" class="btn btn-primary float-right mt-2">Search</button>
+                        </form>
+                </div>
+            </div>
         </div>
+        
+
+        <!-- class="list-group col-md-8" -->
+
+        
     </div>
     
     <!-- <div class="row justify-content-md-center">

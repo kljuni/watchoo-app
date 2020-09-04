@@ -18,19 +18,18 @@
     </head>
     <body>
             {% if session.user_id %}
-        <div class="bg-light">
+        <div class="bg-dark">
             <div class="container">
-                <ul class="nav justify-content-center navbar-light bg-light">
-                    <a class="navbar-brand nav-link mt-3 mr-auto ml-auto ml-md-0" href="#" style="border: 1px solid black;">Watcho</a>
+                <ul class="nav mb-3 justify-content-end navbar-dark bg-dark">
+                    <h1><a class="navbar-brand nav-link mt-3 mr-auto ml-auto ml-md-0" href="#">Watcho</a></h1>
                     <div class="col-6 col-lg-6 mt-3 mx-auto d-none d-md-block d-lg-block d-xl-block">
                         <form action="/search" method="post" class="form-inline md-form form-sm mt-0">
-                            <i class="fas fa-search" aria-hidden="true"></i>
                             <input name="search" class="form-control form-control-sm w-100" type="text" placeholder="Search"
-                            aria-label="Search" style="border: 1px solid black;">
+                            aria-label="Search">
                         </form>
                     </div>
-                    <ul class="navbar-nav mt-3 d-none d-lg-block d-md-block d-xl-block ml-auto">
-                        <li class="nav-item" style="border: 1px solid black;">
+                    <ul class="navbar-nav mt-3 d-none d-lg-block d-xl-block ml-auto">
+                        <li class="nav-item">
                                 <a class="inherit" href="/login">Sign in</a> <span id="navbar-color"> or </span><a class="inherit" href="/register">register</a>
                             </a>
                         </li>
@@ -40,22 +39,22 @@
     
                     <div class="d-lg-none d-xl-none mt-3">
                         <b class="navbar-toggle collapsed" data-toggle="slide-collapse" data-target="#slide-navbar-collapse">
-                            <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" style="color:#757f9a" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" style="color:#757f9a" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
                                 <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                 <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                             </svg>
                         </b>
-                        <div class="collapse navbar-collapse" id="slide-navbar-collapse">
-                                <ul class="navbar-nav ml-4 mt-4">
+                        <div class="collapse navbar-collapse navbar-light" id="slide-navbar-collapse">
+                                <ul class="navbar-nav ml-4 mt-4" >
                                     <li class="nav-item active">
-                                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                                    <a class="nav-link text-dark" href="/login">Login</a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link" href="#">Features</a>
+                                    <a class="nav-link text-dark" href="/register">Register</a>
                                     </li>
                                     <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
+                                    <a class="nav-link text-dark" href="/account">My account</a>
                                     </li>
                                 </ul>
                         </div>
@@ -63,14 +62,13 @@
                 </ul>
             </div>
             <div class="col-11 mt-2 mx-auto d-md-none d-lg-none d-xl-none">
-                <form action="/search" method="post" class="form-inline md-form form-sm mt-0">
-                    <i class="fas fa-search" aria-hidden="true"></i>
-                    <input name="search" class="form-control form-control-sm w-100" type="text" placeholder="Search"
+                <form action="/search" method="post" class="form-inline md-form form mt-0">
+                    <input name="search" class="form-control form-control w-100" type="text" placeholder="Search"
                     aria-label="Search" style="border: 1px solid black;">
                 </form>
             </div>
 
-            <div class="container navbar-light bg-light">
+            <div class="container navbar-dark bg-dark">
                 <ul class="navbar-nav flex-row ml-auto justify-content-center">
                     <li class="nav-item mx-4"><a href="/shop" class="nav-link">SHOP</a></li>
                     <li class="nav-item mx-4"><a href="/sell" class="nav-link">SELL A WATCH</a></li>
@@ -80,7 +78,7 @@
         
             {% else %}
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" href="#">Watcho</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -130,16 +128,7 @@
             </nav>
 
             {% endif %}
-            <div class="container">
-                <!-- Search form -->
-                <div class="col-6 mx-auto mt-4">
-                    <form action="/search" method="post" class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-                        <i class="fas fa-search" aria-hidden="true"></i>
-                        <input name="search" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-                        aria-label="Search">
-                    </form>
-                </div>
-            </div>
+
             <div class="container">                
             {% block body %}
             {% endblock %}
