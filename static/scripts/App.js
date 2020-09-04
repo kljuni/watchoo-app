@@ -13,7 +13,7 @@ function App() {
     const [showMore, setShowMore] = useState(true);
 
     useEffect(() => {
-        fetch('/shop/' + order + '/' + cur_page)
+        fetch('/api/shop/' + order + '/' + cur_page)
         .then(response => response.json()
         .then(data => {
             setWatches(data.watches);

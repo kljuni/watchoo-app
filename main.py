@@ -214,7 +214,7 @@ def shop():
 def testing():
     return render_template("testing.html")
 
-@app.route('/shop/<int:order>/<int:page>')
+@app.route('/api/shop/<int:order>/<int:page>')
 def watches_list(order, page):
     try:
         with sql.connect("mydb.db") as conn:

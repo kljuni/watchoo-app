@@ -5,7 +5,7 @@ import { Card } from 'react-bootstrap';
 export const Watches = ({ watches, images, loading }) => {
     return (
         <div>
-            {loading ? (<h1>Loading...</h1>) : (<div>
+            {loading ? (<h5 className="text-center">Loading...</h5>) : (<div>
                 {watches.map(watch => {                
                     let counter = 0;
                     const img_list = images.map(image => {
