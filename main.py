@@ -276,7 +276,8 @@ def watches_list(order, page):
 @app.route("/sell", methods=['GET', 'POST'])
 def sell():
     if session.get("user_id") is None:
-        return render_template("register.html")
+        reg = "Please register before posting a new listing"
+        return render_template("register.html", reg=reg)
 
     if request.method == 'POST':
         print(request)

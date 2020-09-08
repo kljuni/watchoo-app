@@ -7,9 +7,16 @@
 {% endblock %}
 
 {% block body %}
+
+{% if reg %}
+    <div class="alert alert-warning mt-4 mb-0" role="alert">
+        Please register before posting a new listing
+    </div>
+{% endif %}
+
 <div class="container">
     <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="col-sm-9 col-md-7 col-lg-5 mt-0">
         <div class="card card-signin my-5">
         <div class="card-body">
             <h5 class="card-title text-center">Register</h5>

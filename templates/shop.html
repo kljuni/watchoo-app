@@ -116,8 +116,7 @@
                             </div>
                             <div id="collapseThree" class="collapse" aria-labelledby="headingThree">
                                 <div class="card-body">
-                                    {% for row in brands %}   
-    
+                                    {% for row in brands %}    
                                         <div class="custom-control custom-radio">
                                             <input type="radio" id="brandRadio{{ loop.index }}" name="brand" class="custom-control-input">
                                             <label class="custom-control-label" for="brandRadio{{ loop.index }}">{{ row }}</label>
