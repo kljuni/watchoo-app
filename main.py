@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, g, request, jsonify
 from tempfile import mkdtemp
-from flask_session import Session
+# from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 from helpers import *
@@ -79,11 +79,18 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+app.config['SECRET_KEY'] = 'CHANGEME'
+
+# Set cookies to be ephemeral
+@app.before_request
+def make_session_permanent():
+    session.permanent = False
+
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
+# app.config["SESSION_FILE_DIR"] = mkdtemp()
+# app.config["SESSION_PERMANENT"] = False
+# app.config["SESSION_TYPE"] = "filesystem"
+# Session(app)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -118,6 +125,8 @@ def login():
             session["user_id"] = user[0]
             session["email"] = user[3]
 
+        print(session)
+        print("here it is printed _______________")
         return redirect("/")
     else:
         return render_template("login.html")
@@ -377,5 +386,5 @@ def about():
     return "<h1>About Page</h1>"
     
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 
