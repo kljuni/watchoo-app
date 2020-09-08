@@ -16,7 +16,7 @@ export const Pages = ({ changePage, num_pages, loading, cur_page }) => {
             {loading ? (<h3>Loading pagination...</h3>) : (
             <div>
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination">
+                    <ul className="pagination my-5">
                         {l1}
                         {num_pages.map((page, i) => {
                             if (page == cur_page) page = <b>{page}</b>;

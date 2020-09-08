@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Watches } from './Watches';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import { Pages } from './Pagination';
 
 function App() {
@@ -34,6 +34,7 @@ function App() {
         }
         else if (val == "-2") setCur_page(cur_page + 1);
         else setCur_page(val);
+        window.scrollTo(0, 0);
     }
 
     const Sorting = () => {
@@ -41,12 +42,19 @@ function App() {
         <div className="my-3">
             {showMore ? null : (
                 <Form.Group>
-                    <Form.Control size="sm" as="select" onChange={e => changeOrder(e.target.value)}>
-                        <option value="1" >Newest ads first</option>
-                        <option value="2" >Oldest ads first</option>
-                        <option value="3" >Price ascending</option>
-                        <option value="4" >Price descending</option>
-                    </Form.Control>
+                    <Form.Row>
+                        <Col>
+                        <a className="text-secondary" href="mailto:ivan.kljun@navix.si"><i>Advertise at Watcho.com</i></a>
+                        </Col>
+                        <Col xs="auto" className="ml-auto ml-md-0 my-0">
+                            <Form.Control size="sm" as="select" onChange={e => changeOrder(e.target.value)}>
+                                <option value="1" >Newest ads first</option>
+                                <option value="2" >Oldest ads first</option>
+                                <option value="3" >Price ascending</option>
+                                <option value="4" >Price descending</option>
+                            </Form.Control>
+                        </Col>
+                    </Form.Row>
                 </Form.Group>
             )}
         </div>
@@ -57,10 +65,11 @@ function App() {
         const onClick = () => {
             setShowMore(false);
             Sorting();
+            window.scrollTo(0, 0);
         }
         return (
-          <div>
-            { showMore ? <Button className="text-center" variant="outline-primary" size="lg" onClick={onClick} block>Show more »</Button> : 
+          <div className="d-flex justify-content-center">
+            { showMore ? <Button className="text-center my-5" variant="secondary" onClick={onClick}>Show more »</Button> : 
             <Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/> }
           </div>
         )
