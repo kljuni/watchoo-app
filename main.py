@@ -79,7 +79,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
-app.config['SECRET_KEY'] = 'CHANGEME'
+app.config['SECRET_KEY'] = '7/(T)H76T8g/T&h8/Z/(hn)76tR85VR8gbuzt6rV&%R9(NGn9&/B)'
 
 # Set cookies to be ephemeral
 @app.before_request

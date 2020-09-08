@@ -44,9 +44,9 @@ function App() {
                 <Form.Group>
                     <Form.Row>
                         <Col>
-                        <a className="text-secondary" href="mailto:ivan.kljun@navix.si"><i>Advertise at Watcho.com</i></a>
+                        <a className="text-secondary ml-1" href="mailto:ivan.kljun@navix.si"><i>Advertise at Watcho.com</i></a>
                         </Col>
-                        <Col xs="auto" className="ml-auto ml-md-0 my-0">
+                        <Col xs="auto" className="ml-auto ml-md-0 mr-1 my-0">
                             <Form.Control size="sm" as="select" onChange={e => changeOrder(e.target.value)}>
                                 <option value="1" >Newest ads first</option>
                                 <option value="2" >Oldest ads first</option>

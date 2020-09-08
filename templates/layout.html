@@ -46,15 +46,19 @@
                             </svg>
                         </b>
                         <div class="collapse navbar-collapse navbar-light" id="slide-navbar-collapse">
-                                <ul class="navbar-nav ml-4 mt-4" >
-                                    <li class="nav-item active">
-                                    <a class="nav-link text-dark" href="/login">Login</a>
+                                <ul class="navbar-nav ml-4 mt-4" >                                    
+                                    <li class="nav-item mb-3">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-sliders mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M11.5 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.05 3a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0V3h9.05zM4.5 7a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM2.05 8a2.5 2.5 0 0 1 4.9 0H16v1H6.95a2.5 2.5 0 0 1-4.9 0H0V8h2.05zm9.45 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-2.45 1a2.5 2.5 0 0 1 4.9 0H16v1h-2.05a2.5 2.5 0 0 1-4.9 0H0v-1h9.05z"/>
+                                        </svg>
+                                        <a class="text-dark" href="/account">My account</a>
                                     </li>
-                                    <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/register">Register</a>
-                                    </li>
-                                    <li class="nav-item">
-                                    <a class="nav-link text-dark" href="/account">My account</a>
+                                    <li class="nav-item mb-3">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-power mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                                            <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+                                        </svg>
+                                        <a class="text-dark" href="/logout">Log out</a>
                                     </li>
                                 </ul>
                         </div>
@@ -69,9 +73,11 @@
             </div>
 
             <div class="container navbar-dark bg-dark">
-                <ul class="navbar-nav flex-row ml-auto justify-content-center">
-                    <li class="nav-item mx-4"><a href="/shop" class="nav-link">SHOP</a></li>
-                    <li class="nav-item mx-4"><a href="/sell" class="nav-link">SELL A WATCH</a></li>
+                <!-- Padding on the left is meant to center the nav links -->
+                <ul class="navbar-nav flex-row ml-auto justify-content-around justify-content-md-center pl-md-5">
+                    <li class="nav-item mx-md-4"><a href="/shop" class="nav-link">SHOP</a></li>
+                    <li class="nav-item mx-md-4"><a href="/sell" class="nav-link">SELL A WATCH</a></li>
+                    <li class="nav-item mx-md-4"><a href="/account" class="nav-link">MY ACCOUNT</a></li>
                 </ul>
             </div>
         </div>
@@ -99,19 +105,25 @@
         
                         <div class="d-lg-none d-xl-none mt-3">
                             <b class="navbar-toggle collapsed" data-toggle="slide-collapse" data-target="#slide-navbar-collapse">
-                                <svg width="1.9em" height="1.9em" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor" style="color:#cdd3f4" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
-                                    <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                    <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                                <svg width="1.8em" height="1.8em" viewBox="0 0 16 16" class="bi bi-person-fill" fill="currentColor" style="color:#747caa" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                                 </svg>
                             </b>
                             <div class="collapse navbar-collapse navbar-light" id="slide-navbar-collapse">
                                     <ul class="navbar-nav ml-4 mt-4" >
-                                        <li class="nav-item active">
-                                        <a class="nav-link text-dark" href="/login">Login</a>
+                                        <li class="nav-item mb-3">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-app-indicator mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
+                                                <path d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                              </svg>
+                                            <a class="text-dark" href="/login">Login</a>
                                         </li>
-                                        <li class="nav-item">
-                                        <a class="nav-link text-dark" href="/register">Register</a>
+                                        <li class="nav-item mb-3">
+                                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square mr-2 mb-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>
+                                            <a class="text-dark" href="/register">Register</a>
                                         </li>
                                     </ul>
                             </div>
@@ -126,9 +138,9 @@
                 </div>
     
                 <div class="container navbar-dark bg-dark">
-                    <ul class="navbar-nav flex-row ml-auto justify-content-center">
-                        <li class="nav-item mx-4"><a href="/shop" class="nav-link">SHOP</a></li>
-                        <li class="nav-item mx-4"><a href="/sell" class="nav-link">SELL A WATCH</a></li>
+                    <ul class="navbar-nav flex-row ml-auto justify-content-around justify-content-md-center">
+                        <li class="nav-item mx-md-4"><a href="/shop" class="nav-link">SHOP</a></li>
+                        <li class="nav-item mx-md-4"><a href="/sell" class="nav-link">SELL A WATCH</a></li>
                     </ul>
                 </div>
             </div>
