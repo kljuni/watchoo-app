@@ -1,0 +1,45 @@
+.delete-icon {
+    position: absolute; 
+    right:0.3rem;
+    top:0.3rem;
+}
+
+.h-oglas {
+    height: max-content !important;
+}
+.display-pic {
+    max-height: 8rem !important;
+}
+
+/* .title-watch {
+    height: 38.4px;
+} */
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .h-oglas {
+        height: max-content !important;
+    }
+    .display-pic {
+        max-height: 5rem !important;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) { 
+    .h-oglas {
+        height: 8rem !important;
+    }
+    .display-pic {
+        max-height: 6rem !important;
+    }
+    .title-watch {
+        height: 19.2px;
+    }
+    .delete-icon {
+        position: absolute; 
+        right:0.5rem;
+        bottom:0.5rem;
+        top:auto;
+    }
+}

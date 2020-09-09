@@ -196,6 +196,7 @@ def search():
                         images.append(list(img))
                 return render_template('shop.html', watches=items, images=images, search=search)
                 conn.close()
+
         except Exception as e:
             print(e)
             conn.rollback()
@@ -204,20 +205,26 @@ def search():
 
 @app.route("/shop")
 def shop():
-    with sql.connect("mydb.db") as conn:
-        c = conn.cursor()
-        watches = []
-        images = []
-        brands = []
-        for row in c.execute('SELECT * FROM items ORDER BY created desc'):
-            watches.append(list(row))
-        for row in c.execute('SELECT * FROM images ORDER BY date desc'):
-            images.append(list(row))
-        for row in watches: 
-            if row[1] not in brands:
-                brands.append(row[1])
-    return render_template("shop.html", watches=watches, images=images, brands=brands)
-    conn.close()
+    try:
+        with sql.connect("mydb.db") as conn:
+            c = conn.cursor()
+            watches = []
+            images = []
+            brands = []
+            for row in c.execute('SELECT * FROM items ORDER BY created desc'):
+                watches.append(list(row))
+            for row in c.execute('SELECT * FROM images ORDER BY date desc'):
+                images.append(list(row))
+            for row in watches: 
+                if row[1] not in brands:
+                    brands.append(row[1])
+        return render_template("shop.html", watches=watches, images=images, brands=brands)
+        conn.close()
+
+    except Exception as e:
+        conn.rollback()
+        return redirect('/')
+        conn.close()
 
 @app.route("/testing")
 def testing():
@@ -372,10 +379,81 @@ def watch(item_id):
         return render_template('watch.html', item_id = item_id, watch=watch, image=image)
         conn.close()
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'DELETE'])
 @login_required
-def account():
-    return render_template("account.html", countryList = countryList)
+def account(id_num=0):
+    if request.method == 'DELETE':
+        if session.get("user_id") is None:
+            reg = "Please register before accessing your account"
+            return render_template("register.html", reg=reg)
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                watches = []
+                images = []
+                user = session.get("user_id")
+                for row in c.execute('SELECT * FROM items WHERE item_owner=? ORDER BY created desc', (user,)):
+                    watches.append(list(row))
+                for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
+                    images.append(list(row))
+                # for row in watches: 
+                #     if row[1] not in brands:
+                #         brands.append(row[1])
+            return render_template("account.html", watches=watches, images=images)
+            conn.close()
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            return redirect('/')
+            conn.close()
+    else:
+        if session.get("user_id") is None:
+            reg = "Please register before accessing your account"
+            return render_template("register.html", reg=reg)
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                watches = []
+                images = []
+                user = session.get("user_id")
+                for row in c.execute('SELECT * FROM items WHERE item_owner=? ORDER BY created desc', (user,)):
+                    watches.append(list(row))
+                for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
+                    images.append(list(row))
+                # for row in watches: 
+                #     if row[1] not in brands:
+                #         brands.append(row[1])
+            return render_template("account.html", watches=watches, images=images)
+            conn.close()
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            return redirect('/')
+            conn.close()
+
+@app.route("/account/<int:item_id>", methods=['DELETE'])
+@login_required
+def del_item(item_id):
+    if request.method == 'DELETE':
+        if session.get("user_id") is None:
+            reg = "Please register before accessing your data"
+            return render_template("register.html", reg=reg)
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                user = session.get("user_id")
+                c.execute('DELETE FROM items WHERE item_id=?', (item_id,))
+                c.execute('DELETE FROM images WHERE item=?', (item_id,))
+            print("that was a success, congrats !!!")
+            conn.close()
+            return redirect('/account')
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            return redirect('/')
+            conn.close()
+    else:
+        return redirect('/')
 
 @app.route("/logout")
 def logout():

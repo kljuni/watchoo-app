@@ -2,6 +2,7 @@
 
 {% block head %}
   <link href="/static/shop.css" rel="stylesheet">
+  <link href="/static/account.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
@@ -12,24 +13,89 @@
     <div class="card">
       <div class="card-header" id="headingOne">
         <h5 class="mb-0">
-          <button class="btn btn-secondary" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-            
+          <button class="btn btn-secondary btn-block" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            My listings   
+            <svg width="0.9em" height="0.9em" viewBox="0 0 16 16" class="bi bi-chevron-down float-right mt-2" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
           </button>
         </h5>
       </div>
   
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
         <div class="container p-3">
-            
-        </div>
 
+              {% for row in watches %}            
+            <span class="list-group-item list-group-item-action align-items-start h-oglas mt-2 p-0">
+                <div class="row h-100 m-0">
+                    <div class="col-3 col-md-2 text-center pl-3 pr-1 pr-md-3 my-md-auto my-3">
+                        
+                        {% for image in images if image[0] == row[0] %}
+                            {% if loop.index <= 1 %}
+                            <a href="{{ url_for('watch', item_id = row[0]) }}" ><img src="{{ image[3] }}" class="img-fluid display-pic" alt="Responsive image"></a>
+                            {% endif %}
+                        {% endfor %}
+                                            
+                    </div>
+                    <div class="col-9 col-md-10 px-1 px-md-3 pt-2 h-100">
+                        <a href="{{ url_for('watch', item_id = row[0]) }}" ><p class="card-title">{{ row[1] }} - {{ row[2] }}</p></a>
+                        <hr class="my-2">
+                        <div class="d-flex mt-2">
+                            <div class="text-nowrap mb-2">
+                                <p class="mb-0">Price: <b>{{ row[7] }} €</b></p>
+                                <p class="mb-0">Date published: <b>{{ '/'.join(row[9][0:10].replace("-", " ").split()[::-1]) }}</b></p>
+                            </div>
+                        </div>
+                        <span onclick="delete_fun({{ row[0] }})">
+                          <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash delete-icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                          </svg>
+                        </span>
+                    </div>
+                </div>
+              </span>            
+        {% endfor %}
+              <!-- {% for el in watches %}
+                <div class="col-md-12">
+                  <div class="card m-2">
+                      <div class="row mx-0">
+                        <div class="col-auto" style=" background-color:#222528;">
+                          <div class="card-body text-center card-image-top-cont p-0">
+                          {% for image in images if image[0] == el[0] %}
+                                  {% if loop.index <= 1 %}
+                                  <img src="{{ image[3] }}" class="card-img-top mx-auto img-top-card" style="" alt="Card image cap">
+                                  {% endif %}
+                          {% endfor %}
+                          </div>
+                        </div>
+                        <div class="col-10 p-0">
+                            <div class="card-body">
+                              <h6 class="card-title">{{ el[1] }} - {{ el[2] }}</h6>
+                            </div>
+                            
+                            <p>{{ el[9][0:10] }}</p>
+                            
+                            <div class="card-body">
+                              <a href="#" class="card-link">Card link</a>
+                              <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>                  
+              {% endfor %} -->
+        </div>
     </div>
     </div>
     <div class="card">
       <div class="card-header" id="headingTwo">
         <h5 class="mb-0">
-          <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          <button class="btn btn-secondary collapsed btn-block" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
             General account settings
+            <svg width="0.9em" height="0.9em" viewBox="0 0 16 16" class="bi bi-chevron-down float-right mt-2" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
           </button>
         </h5>
       </div>
@@ -71,8 +137,11 @@
     <div class="card">
       <div class="card-header" id="headingThree">
         <h5 class="mb-0">
-          <button class="btn btn-secondary collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          <button class="btn btn-secondary collapsed btn-block" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
             Change password
+            <svg width="0.9em" height="0.9em" viewBox="0 0 16 16" class="bi bi-chevron-down float-right mt-2" fill="white" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
           </button>
         </h5>
       </div>
@@ -114,6 +183,18 @@
               x.type = "password";
           }
           }
+      function delete_fun(val) {
+        console.log(val);
+        var answer = confirm("Do you really want to delete this item?");
+        if (answer) {
+          fetch('/account/' + val, {
+          method: 'delete',
+          }).then(location.reload())
+        }
+        else {
+          console.log("Nope, don't want to.")
+        }
+      }
   </script>
 
 {% endblock %}
