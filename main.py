@@ -177,7 +177,19 @@ def register():
 @app.route("/")
 @app.route("/home")
 def index():
-    return render_template("index.html")
+    if session.get("user_id") is None:
+        return render_template("index.html", user="Welcome to the world of watch collectors")
+    else:
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                name = c.execute('SELECT firstname FROM users WHERE user_id=?', (session.get("user_id"),))
+            return render_template("index.html", user='Hello {}, welcome back'.format(name))
+            conn.close()
+        except Exception as e:
+            conn.rollback()
+            return redirect('/')
+            conn.close()
 
 @app.route("/search", methods=['GET', 'POST'])
 def search():
@@ -327,7 +339,7 @@ def sell():
                             im = Image.open(image)
 
                             # Compress the image to aribitrary quality, here set to 30
-                            im.save(filename, optimize=True, quality=30) 
+                            im.save(filename, optimize=True, quality=5) 
                             print("new commit was done")
                             # Save image to file system
                             im.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
