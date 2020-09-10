@@ -16,9 +16,11 @@ Jinja2==2.11.2
 lazy-object-proxy==1.4.3
 MarkupSafe==1.1.1
 mccabe==0.6.1
+Pillow==7.2.0
 pylint==2.5.3
 python-engineio==3.13.1
 python-socketio==4.6.0
+redis==3.5.3
 six==1.15.0
 toml==0.10.1
 virtualenv==20.0.27
