@@ -6,11 +6,14 @@ from werkzeug.utils import secure_filename
 from helpers import *
 from datetime import datetime
 from flask_socketio import SocketIO, send
+from PIL import Image
 import sqlite3 as sql
 import os
 import random
 import string
 import math
+import PIL
+import glob
 
 
 app = Flask(__name__)
@@ -319,8 +322,15 @@ def sell():
 
                         if allowed_image(image.filename):
                             filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
-    
-                            image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                            
+                            # Open the image with Pillow "Image" class
+                            im = Image.open(image)
+
+                            # Compress the image to aribitrary quality, here set to 30
+                            im.save(filename, optimize=True, quality=30) 
+                            print("new commit was done")
+                            # Save image to file system
+                            im.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
 
                         cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
