@@ -184,7 +184,8 @@ def index():
             with sql.connect("mydb.db") as conn:
                 c = conn.cursor()
                 name = c.execute('SELECT firstname FROM users WHERE user_id=?', (session.get("user_id"),))
-            return render_template("index.html", user='Hello {}, welcome back'.format(name))
+                names = [lis[0] for lis in name][0]
+            return render_template("index.html", user='Hello {}, welcome back'.format(names))
             conn.close()
         except Exception as e:
             conn.rollback()
