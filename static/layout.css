@@ -1,3 +1,6 @@
+.nav a {
+    text-decoration: none !important;
+}
 /* Dropdown Button */
 .dropbtn {
     background-color: #4CAF50;
@@ -54,16 +57,19 @@
 // No media query since this is the default in Bootstrap */
 
 /* // Small devices (landscape phones, 576px and up) */
-
+@media (min-width: 576px) { 
+}
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
-    .navbar-brand {
-}
 }
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {}
+@media (min-width: 992px) {
+    .navbar-brand {
+        margin-right: 7rem;
+}
+}
 
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {}

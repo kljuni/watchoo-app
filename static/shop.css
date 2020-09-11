@@ -1,6 +1,11 @@
 /* // Extra small devices (portrait phones, less than 576px) */
 /* // No media query since this is the default in Bootstrap */
 
+.desc-card a {
+    color: black;
+    text-decoration: underline;
+}
+
 .list-group-item {
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
 }
@@ -10,7 +15,7 @@
     top: 0px;
     left: 0px;
     z-index: 1;
-    width: 50%;
+    width: 30%;
 }
 .cat-link:link {
     color: black;

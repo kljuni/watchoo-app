@@ -176,19 +176,41 @@ def register():
 
 @app.route("/")
 @app.route("/home")
-def index():
+def index():    
     if session.get("user_id") is None:
-        return render_template("index.html", user="Welcome to the world of watch collectors")
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                watches = []
+                images = []
+                for row in c.execute('SELECT * FROM items ORDER BY created desc LIMIT 4'):
+                    watches.append(list(row))
+                for row in c.execute('SELECT * FROM images ORDER BY date desc LIMIT 16'):
+                    images.append(list(row))
+                return render_template("index.html", watches=watches, images=images, user="Welcome to the world of watch collectors")
+                conn.close()
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            return redirect('/')
+            conn.close()
     else:
         try:
             with sql.connect("mydb.db") as conn:
                 c = conn.cursor()
                 name = c.execute('SELECT firstname FROM users WHERE user_id=?', (session.get("user_id"),))
                 names = [lis[0] for lis in name][0]
-            return render_template("index.html", user='Hello {}, welcome back'.format(names))
+                watches = []
+                images = []
+                for row in c.execute('SELECT * FROM items ORDER BY created desc LIMIT 4'):
+                    watches.append(list(row))
+                for row in c.execute('SELECT * FROM images ORDER BY date desc LIMIT 16'):
+                    images.append(list(row))
+            return render_template("index.html", watches=watches, images=images, user='Hello {}, welcome back'.format(names))
             conn.close()
         except Exception as e:
             conn.rollback()
+            print(e)
             return redirect('/')
             conn.close()
 
@@ -225,16 +247,16 @@ def shop():
         with sql.connect("mydb.db") as conn:
             c = conn.cursor()
             watches = []
-            images = []
+            # images = []
             brands = []
             for row in c.execute('SELECT * FROM items ORDER BY created desc'):
                 watches.append(list(row))
-            for row in c.execute('SELECT * FROM images ORDER BY date desc'):
-                images.append(list(row))
+            # for row in c.execute('SELECT * FROM images ORDER BY date desc'):
+            #     images.append(list(row))
             for row in watches: 
                 if row[1] not in brands:
                     brands.append(row[1])
-        return render_template("shop.html", watches=watches, images=images, brands=brands)
+        return render_template("shop.html", watches=watches, brands=brands)
         conn.close()
 
     except Exception as e:
@@ -290,6 +312,7 @@ def watches_list(order, page):
             num_pages = list(range(1, num_pages + 1))
         conn.close()
         return jsonify(watches = watches, images = images, num_pages=num_pages)
+        
     except Exception as e:
         print(e)
         conn.rollback()
@@ -488,5 +511,6 @@ def about():
     return "<h1>About Page</h1>"
     
 if __name__ == "__main__":
+    # app.run(debug=True)
     app.run(threaded=True, port=5000)
 
