@@ -145,14 +145,14 @@ def register():
             firstname = request.form.get("firstname")
             secondname = request.form.get("secondname")
             email = request.form.get("email1")
-            city = request.form.get("city")
             country = request.form.get("country")
+            seller = request.form.get("seller")
             hash = generate_password_hash(request.form.get("password1"))
             created = datetime.now().isoformat()
-            
+
             with sql.connect("mydb.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO users (firstname, secondname, email, hash, city, country, created) VALUES (?,?,?,?,?,?,?)", (firstname, secondname, email, hash, city, country, created))
+                cur.execute("INSERT INTO users (firstname, secondname, email, hash, country, seller, created) VALUES (?,?,?,?,?,?,?)", (firstname, secondname, email, hash, country, seller, created))
                 
                 if check(email) == False:
                     raise Exception("Invalid email")
@@ -172,7 +172,7 @@ def register():
             return render_template("/register.html", msg = "There was an error in database")
             con.close()
     else:
-        return render_template("register.html")
+        return render_template("register.html", countryList = countryList)
 
 @app.route("/")
 @app.route("/home")
@@ -336,12 +336,13 @@ def sell():
             movement = request.form.get("movement")
             price = request.form.get("price")
             description = request.form.get("description") 
+            location = request.form.get("location") 
             created = datetime.now().isoformat()
             category = request.form.get("category")
 
             with sql.connect("mydb.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, created, session["user_id"], category))
+                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, location, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, location, created, session["user_id"], category))
                 con.commit()
                 file_entry = query_db('SELECT MAX(item_id) FROM items')
                 
@@ -511,6 +512,6 @@ def about():
     return "<h1>About Page</h1>"
     
 if __name__ == "__main__":
-    # app.run(debug=True)
-    app.run(threaded=True, port=5000)
+    app.run(debug=True)
+    # app.run(threaded=True, port=5000)
 

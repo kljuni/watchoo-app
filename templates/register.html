@@ -49,14 +49,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-label-group">
-                    <input name="city" type="text" class="form-control" id="formGroupExampleInput6" placeholder="City" required>
-                    <label for="formGroupExampleInput6">City</label>
+
+                <div class="input-group form-label-group mb-3">
+                    <select name="seller" class="custom-select input-border form-control" id="formGroupExampleInput5">
+                      <option selected disabled class="p-3">I am a</option>
+                        <option value="Private seller">Private seller / buyer</option>
+                        <option value="Verified dealership">Dealership</option>
+                    </select>
                 </div>
-                <div class="form-label-group">
-                    <input name="country" type="text" class="form-control" id="formGroupExampleInput7" placeholder="Country" required>
-                    <label for="formGroupExampleInput7">Country</label>
+
+                <div class="input-group form-label-group mb-3">
+                    <select class="custom-select input-border form-control " id="formGroupExampleInput5">
+                      <option selected disabled class="p-3">Country</option>
+                      {% for row in countryList %}
+                        <option value="{{ row }}">{{ row }}</option>
+                      {% endfor %}
+                    </select>
                 </div>
+
                 <div class="form-group">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
