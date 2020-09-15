@@ -342,22 +342,30 @@ def sell():
 
             with sql.connect("mydb.db") as con:
                 cur = con.cursor()
-                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, location, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, location, created, session["user_id"], category))
-                con.commit()
                 file_entry = query_db('SELECT MAX(item_id) FROM items')
-                
+
                 # Save uploaded image to image. 
                 # Save the uploaded item_id
-                uploaded_files = request.files.getlist("input-fa[]")
+                uploaded_files = request.files.getlist("input-fas[]")
                 print(uploaded_files)
-                item_id = [lis[0] for lis in file_entry][0]
+                item_id = [lis[0] for lis in file_entry][0] + 1
                 for image in uploaded_files:
+                    print("here is the image")
+                    print(image)
                     if image:                
                         # Check if the image has a name
+                        print("it gets here 1")
                         if image.filename == "":
                             return render_template("/sell.html", msg = "Selected image has no name")
 
+                        # Check if the inputed file is not an image
+                        # if not image.filename:
+                        #     con.rollback()
+                        #     return render_template("/sell.html", msg = "Please input photos in JPEG, JPG, PNG or GIF extension")
+                        #     con.close()
+
                         if allowed_image(image.filename):
+                            print("it gets here 2")
                             filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
                             
                             # Open the image with Pillow "Image" class
@@ -369,9 +377,12 @@ def sell():
                             # Save image to file system
                             im.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
 
+                            cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
+                        else: 
+                            raise NameError('Wrong image format')
 
-                        cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
-
+                cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, location, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, location, created, session["user_id"], category))
+                con.commit()
                 
                 # # image = request.files['input-fa[]']
                 # # print(image)

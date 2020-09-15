@@ -1,46 +1,39 @@
 {% extends "layout.html" %}
 
 {% block head %}
-       
-    <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous"> -->
-    
-    <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
-    <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" / -->
-    <!-- the font awesome icon library if using with `fas` theme (or Bootstrap 4.x). Note that default icons used in the plugin are glyphicons that are bundled only with Bootstrap 3.x. -->
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous"> -->
 
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" /> -->
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script> -->
+    <!-- bootstrap 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
+    <!-- link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
+    <!-- the font awesome icon library if using with `fas` theme (or Bootstrap 4.x). Note that default icons used in the plugin are glyphicons that are bundled only with Bootstrap 3.x. -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you
         wish to resize images before upload. This must be loaded before fileinput.min.js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/piexif.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/piexif.min.js" type="text/javascript"></script>
     <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
         This must be loaded before fileinput.min.js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/sortable.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/sortable.min.js" type="text/javascript"></script>
     <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for 
         HTML files. This must be loaded before fileinput.min.js -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/purify.min.js" type="text/javascript"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/plugins/purify.min.js" type="text/javascript"></script>
     <!-- popper.min.js below is needed if you use bootstrap 4.x (for popover and tooltips). You can also use the bootstrap js 
     3.3.x versions without popper.min.js. -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <!-- bootstrap.min.js below is needed if you wish to zoom and preview file content in a detail modal
         dialog. bootstrap 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script> -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <!-- the main fileinput plugin file -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script> -->
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    
-    <!--Material Design Iconic Font-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js"></script>
+    <!-- following theme script is needed to use the Font Awesome 5.x theme (`fas`) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/themes/fas/theme.min.js"></script>
+    <!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/locales/LANG.js"></script>
 
     <link href="/static/shop.css" rel="stylesheet">
 
-    <!-- Image Uploader CSS -->
-    <link rel="stylesheet" href="dist/image-uploader.min.css">
-
-    <!-- <script src="node_modules/bootstrap-fileinput/themes/fas/theme.js"></script> -->
 {% endblock %}
 
 {% block body %}
@@ -48,7 +41,7 @@
     <div class="row justify-content-md-center mt-4">
         <div class="col-md-8">
             <h2 class="mb-4 display-4 text-center">Watch details</h2>
-                <div class="col-md-10 mx-md-auto">
+                <div class="col-md-12 mx-md-auto">
                 <form action="/sell" method="post" enctype="multipart/form-data" class="mx-auto">
                     <div class="form-group">
                         <div class="row">
@@ -56,7 +49,7 @@
                                 <b class="my-0">Brand:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <input type="text" list="brand" name="brand" class="form-control"/>
+                                <input type="text" list="brand" name="brand" class="form-control" required/>
                                     <datalist id="brand">
                                         {% for el in watchBrands %}
                                         <option value="{{ el }}">{{ el }}</option>   
@@ -71,7 +64,7 @@
                                 <b class="my-0">Model:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <input name="model" type="text" class="form-control" id="inputM">
+                                <input name="model" type="text" class="form-control" id="inputM" required>
                             </div>
                         </div>
                     </div>
@@ -157,7 +150,7 @@
                                 <b class="my-0">Price:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <input name="price" type="number" class="form-control" id="inputM">
+                                <input name="price" type="number" class="form-control" id="inputM" required>
                             </div>
                         </div>
                     </div>
@@ -179,52 +172,15 @@
                                 <b class="my-0">Location:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <input name="location" type="text" class="form-control" id="inputM">
+                                <input name="location" type="text" class="form-control" id="inputM" required>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- <div name="file" id="react-root"></div> -->
+                    <div class="file-loading">
+                        <input id="input-fas" name="input-fas[]" type="file" accept="image/x-png,image/gif,image/jpeg" multiple required>
+                    </div>
 
-                    <!-- <div class="file-upload-wrapper">
-                        <input type="file" name="file" id="input-file-now-custom-2" class="file-upload" 
-                        data-height="100" accept="image/x-png,image/gif,image/jpeg"/>
-                    </div> -->
-
-                    <!-- <div class="col-md-10 float-right">
-                        <div class="uploader__box js-uploader__box">
-                                <div class="uploader__contents">
-                                    <label class="button button--secondary" for="fileinput">Select Files</label>
-                                    <input id="fileinput" class="uploader__file-input" type="file" multiple value="Select Files">
-                                </div>
-                        </div>
-                    </div> -->
-<!-- 
-                    <input id="input-b3" name="input-b3[]" type="file" class="file" multiple 
-                        data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload..."> -->
-
-                    <!-- <div class="file-loading mx-md-auto">
-                        <input id="input-fa" name="input-fa[]" type="file" multiple="multiple" required>
-                    </div> -->
-
-                    <!-- <div class="form-group">
-                        <label class="col-sm-3 control-label">
-                            Attachment(s)
-                            (Attach multiple files.)
-                        </label>
-                        <div class="col-sm-9">
-                            <span class="btn btn-default btn-file">
-                                <input id="input-2" name="input2[]" type="file" class="file" multiple data-show-upload="true" data-show-caption="true">
-                            </span>
-                        </div>
-                    </div> -->
-
-                    <!-- <div class="input-field">
-                        <label class="active">Photos</label>
-                        <div class="input-images-2" style="padding-top: .5rem;"></div>
-                    </div> -->
-
-                    <div class="input-images"></div>
 
                     <div class="container">
                         <button type="submit" class="btn btn-primary float-right my-4">Save details and continue</button>
@@ -234,6 +190,21 @@
         </div>
     </div>
 
+
+    <script>
+        // initialize with defaults
+        $("#input-id").fileinput();
+        
+        // with plugin options
+        $("#input-id").fileinput({'showUpload':false, 'previewFileType':'any'});
+    </script>
+
+    <script>
+    $("#input-fas").fileinput({
+        theme: "fas",
+        // uploadUrl: "/file-upload-batch/2"
+    });
+    </script>
     <!-- <script src="//code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="/static/jquery.imageuploader.js"></script> -->
     <!-- <script src="{{ url_for('static', filename='dist/bundle.js') }}"></script>
@@ -326,17 +297,6 @@
         infoArea.textContent = 'File name: ' + fileName;
     }
     </script> -->
-
-    <script>
-        $(document).ready(function(){
-
-        $('.input-images').imageUploader();
-
-        });
-    </script>
-    <!-- Image Uploader Js -->
-    <script type="text/javascript" src="dist/image-uploader.min.js"></script>
-
 
 {% endblock %}
 
