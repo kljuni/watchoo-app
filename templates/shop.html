@@ -22,7 +22,7 @@
         </div>
         {% endif %} -->
 
-        <div id="myNavo" class="overlay-o">
+        <!-- <div id="myNavo" class="overlay-o">
             <a href="javascript:void(0)" class="closebtn-o" onclick="closeNav()">&times;</a>
             <div class="overlay-content-o">
                 <form action="/shop/categories" method="post">
@@ -44,12 +44,12 @@
                             <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
                                 <div class="card-body">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="genderRadio1" name="gender" class="custom-control-input">
-                                        <label class="custom-control-label" for="genderRadio1">Men's/Unisex</label>
+                                        <input type="radio" value="Men's/Unisex" id="genderRadio-nav-1" name="gender" class="custom-control-input">
+                                        <label class="custom-control-label" for="genderRadio-nav-1">Men's/Unisex</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="genderRadio2" name="gender" class="custom-control-input">
-                                        <label class="custom-control-label" for="genderRadio2">Women's</label>
+                                        <input type="radio" value="Women's" id="genderRadio-nav-2" name="gender" class="custom-control-input">
+                                        <label class="custom-control-label" for="genderRadio-nav-2">Women's</label>
                                     </div>
                                 </div>
                             </div>
@@ -71,32 +71,36 @@
                             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
                                 <div class="card-body">
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio1" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio1">Smartwatch</label>
+                                        <input type="radio" value="Smartwatch" id="categoryRadio-nav-1" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-1">Smartwatch</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio2" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio2">Chronograph</label>
+                                        <input type="radio" value="Chronograph" id="categoryRadio-nav-2" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-2">Chronograph</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio3" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio3">GMT watch</label>
+                                        <input type="radio" value="GMT watch" id="categoryRadio-nav-3" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-3">GMT watch</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio4" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio4">Diver's watch</label>
+                                        <input type="radio" value="Diver's watch" id="categoryRadio-nav-4" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-4">Diver's watch</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio5">Pilot watch</label>
+                                        <input type="radio" value="Pilot watch" id="categoryRadio-nav-5" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-5">Pilot watch</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio6" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio6">Casual</label>
+                                        <input type="radio" value="Casual" id="categoryRadio-nav-6" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-6">Casual</label>
                                     </div>
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" id="categoryRadio7" name="category" class="custom-control-input">
-                                        <label class="custom-control-label" for="categoryRadio7">Dress watch</label>
+                                        <input type="radio" value="Dress watch" id="categoryRadio-nav-7" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-7">Dress watch</label>
+                                    </div>
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" value="Other" id="categoryRadio-nav-8" name="category" class="custom-control-input">
+                                        <label class="custom-control-label" for="categoryRadio-nav-8">Other</label>
                                     </div>
                                 </div>
                             </div>
@@ -133,21 +137,22 @@
                     </div>                    
                 </form>
             </div>
-        </div>
+        </div> -->
 
         <button type="button" class="btn btn-outline-secondary w-75 mt-3 text-center mx-auto d-md-none d-sm-block" style="cursor:pointer" onclick="openNav()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-filter" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
             </svg> Filter
         </button>
+
         <div class="container bg-light">
             <div class="row">               
                 <div class="col-md-9 p-0">
                     
-                    <div id="root"></div>
+                    
                 </div>      
                 
-                <div class="col-md-3 mt-3 d-none d-xs-block d-sm-block">
+                <!-- <div class="col-md-3 mt-3 d-none d-xs-block d-sm-block">
                         <form action="/shop/categories" method="post">
                             <div class="accordion" id="accordionExample">
                                 <div class="card" type="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -164,11 +169,11 @@
                                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
                                         <div class="card-body">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="genderRadio1" name="gender" class="custom-control-input">
+                                                <input type="radio" value="Men's/Unisex" id="genderRadio1" name="gender" class="custom-control-input">
                                                 <label class="custom-control-label" for="genderRadio1">Men's/Unisex</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="genderRadio2" name="gender" class="custom-control-input">
+                                                <input type="radio" value="Women's" id="genderRadio2" name="gender" class="custom-control-input">
                                                 <label class="custom-control-label" for="genderRadio2">Women's</label>
                                             </div>
                                         </div>
@@ -188,32 +193,36 @@
                                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
                                         <div class="card-body">
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio1" name="category" class="custom-control-input">
+                                                <input type="radio" value="Smartwatch" id="categoryRadio1" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio1">Smartwatch</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio2" name="category" class="custom-control-input">
+                                                <input type="radio" value="Chronograph" id="categoryRadio2" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio2">Chronograph</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio3" name="category" class="custom-control-input">
+                                                <input type="radio" value="GMT watch" id="categoryRadio3" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio3">GMT watch</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio4" name="category" class="custom-control-input">
+                                                <input type="radio" value="Diver's watch" id="categoryRadio4" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio4">Diver's watch</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio5" name="category" class="custom-control-input">
+                                                <input type="radio" value="Pilot watch" id="categoryRadio5" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio5">Pilot watch</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio6" name="category" class="custom-control-input">
+                                                <input type="radio" value="Casual" id="categoryRadio6" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio6">Casual</label>
                                             </div>
                                             <div class="custom-control custom-radio">
-                                                <input type="radio" id="categoryRadio7" name="category" class="custom-control-input">
+                                                <input type="radio" value="Dress watch" id="categoryRadio7" name="category" class="custom-control-input">
                                                 <label class="custom-control-label" for="categoryRadio7">Dress watch</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" value="Other" id="categoryRadio7" name="category" class="custom-control-input">
+                                                <label class="custom-control-label" for="categoryRadio7">Other</label>
                                             </div>
                                         </div>
                                     </div>
@@ -233,7 +242,7 @@
                                             {% for row in brands %}   
             
                                                 <div class="custom-control custom-radio">
-                                                    <input type="radio" id="brandRadio{{ loop.index }}" name="brand" class="custom-control-input">
+                                                    <input type="radio" value="{{ row }}" id="brandRadio{{ loop.index }}" name="brand" class="custom-control-input">
                                                     <label class="custom-control-label" for="brandRadio{{ loop.index }}">{{ row }}</label>
                                                 </div>
                                             {% endfor %}                                    
@@ -248,15 +257,17 @@
                             </button>
                         </form>
                 </div>
-            </div>
+            </div> -->
         </div>
+        
         
 
         <!-- class="list-group col-md-8" -->
 
         
     </div>
-    
+    </div>
+    <div id="root"></div>
     <!-- <div class="row justify-content-md-center">
         <div class="list-group col-md-8">        
         {% for row in watches %}            
@@ -401,7 +412,6 @@
     <script>
     function openNav() {
       document.getElementById("myNavo").style.display = "block";
-      console.log("sth works")
     }
     
     function closeNav() {

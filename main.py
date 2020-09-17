@@ -9,6 +9,8 @@ from flask_socketio import SocketIO, send
 from PIL import Image
 import sqlite3 as sql
 import os
+import threading
+import time
 import random
 import string
 import math
@@ -88,6 +90,30 @@ app.config['SECRET_KEY'] = '7/(T)H76T8g/T&h8/Z/(hn)76tR85VR8gbuzt6rV&%R9(NGn9&/B
 @app.before_request
 def make_session_permanent():
     session.permanent = False
+
+# Populate the brands variable with currently available (listed) brands
+@app.before_first_request
+def activate_job():
+    def run_job():
+        while True:
+            try:
+                with sql.connect("mydb.db") as conn:
+                    global brands
+                    c = conn.cursor()
+                    watches = []
+                    brands = []
+                    for row in c.execute('SELECT * FROM items ORDER BY created desc'):
+                        watches.append(list(row))
+                    for row in watches: 
+                        if row[1] not in brands:
+                            brands.append(row[1])
+                conn.close()
+            except Exception as e:
+                conn.rollback()
+                conn.close()
+            time.sleep(5)
+    thread = threading.Thread(target=run_job)
+    thread.start()
 
 # Configure session to use filesystem (instead of signed cookies)
 # app.config["SESSION_FILE_DIR"] = mkdtemp()
@@ -247,20 +273,68 @@ def shop():
         with sql.connect("mydb.db") as conn:
             c = conn.cursor()
             watches = []
+            global brands
             # images = []
-            brands = []
+            # brands = []
             for row in c.execute('SELECT * FROM items ORDER BY created desc'):
                 watches.append(list(row))
             # for row in c.execute('SELECT * FROM images ORDER BY date desc'):
             #     images.append(list(row))
-            for row in watches: 
-                if row[1] not in brands:
-                    brands.append(row[1])
+            # for row in watches: 
+            #     if row[1] not in brands:
+            #         brands.append(row[1])
         return render_template("shop.html", watches=watches, brands=brands)
         conn.close()
 
     except Exception as e:
         conn.rollback()
+        return redirect('/')
+        conn.close()
+
+@app.route("/shop/categories", methods=['POST'])
+def categories():
+    try:
+        with sql.connect("mydb.db") as conn:
+
+            if len(request.form["gender"]) == 0:
+                gender = "noben"
+            else:
+                gender = request.form["gender"]
+            # gender = request.form["gender"]
+            category = request.form["category"]
+            brand = request.form["brand"]
+            print("here the brands")
+            print(gender)
+            print(category)
+            print(brand)
+            if gender == None:
+                gender = ''
+            if category == None:
+                category = ''
+            if brand == None:
+                brand = ''
+
+            c = conn.cursor()            
+            items = []
+            list_items = []
+            images = []
+            for row in c.execute("SELECT * FROM items WHERE brand LIKE ? AND gender LIKE ? AND category LIKE ? ORDER BY created desc", ('%' + brand + '%', '%' + gender + '%', '%' + category + '%')):
+                items.append(list(row))
+            for item in items:
+                list_items.append(item[0])
+            for item in list_items:
+                image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
+                for img in image:
+                    images.append(list(img))
+        print("printing items")
+        print(list_items)
+        print(items)
+        return render_template("shop.html", watches=list_items)
+        conn.close()
+
+    except Exception as e:
+        conn.rollback()
+        print(e)
         return redirect('/')
         conn.close()
 
@@ -270,54 +344,103 @@ def testing():
 
 @app.route('/api/shop/<int:order>/<int:page>')
 def watches_list(order, page):
-    try:
-        with sql.connect("mydb.db") as conn:
-            c = conn.cursor()
-            watches = []
-            images = []
-            brands = []
-            item_ids = []
+    print(request.args)
+    arg1 = request.args["arg1"]
+    arg2 = request.args["arg2"]
+    arg3 = request.args["arg3"]
+    print("here printing args")
+    print(arg1)
+    print(arg2)
+    print(arg3)
+    if (arg1 or arg2 or arg3):
+        try:
+            with sql.connect("mydb.db") as conn:
+                gender = request.args["arg1"]
+                category = request.args["arg2"]
+                brand = request.args["arg3"]
+                print("here the brands")
+                print(gender)
+                print(category)
+                print(brand)
+                if gender == None:
+                    gender = ''
+                if category == None:
+                    category = ''
+                if brand == None:
+                    brand = ''
+                print("hallelujah")
+                c = conn.cursor()            
+                items = []
+                list_items = []
+                images = []
+                for row in c.execute("SELECT * FROM items WHERE brand LIKE ? AND gender LIKE ? AND category LIKE ? ORDER BY created desc", ('%'+brand+'%', '%'+gender+'%', '%'+category+'%')):
+                    items.append(list(row))
+                for item in items:
+                    list_items.append(item[0])
+                for item in list_items:
+                    image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
+                    for img in image:
+                        images.append(list(img))
+                print("printing items")
+                print(list_items)
+                print(items)            
+            global brands
+            return jsonify(watches = items, images = images, brands = brands)
+            conn.close()
 
-            # Get number of all listed items by counting all rows in items table
-            num_items = 0
-            for row in c.execute('SELECT COUNT(*) FROM items'):
-                num_items = row[0]
+        except Exception as e:
+            conn.rollback()
+            print(e)
+            return redirect('/')
+            conn.close()
+    else: 
+        try:
+            with sql.connect("mydb.db") as conn:
+                c = conn.cursor()
+                watches = []
+                images = []
+                item_ids = []
 
-            # Get number of pages by deviding the number of listed items and ceil the result.
-            num_pages = math.ceil(num_items / 12)
+                # Get number of all listed items by counting all rows in items table
+                num_items = 0
+                for row in c.execute('SELECT COUNT(*) FROM items'):
+                    num_items = row[0]
 
-            # If requested page does not exist, redirect user to "shop" page
-            if page < 1 or page > num_pages or order < 1 or order > 4:
-                return redirect('/shop')
-            # Select 12 items from items with the offset for the selected page and the selected order
-            if order == 1:
-                for row in c.execute('SELECT * FROM items ORDER BY created desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
-                    watches.append(list(row))
-            elif order == 2:
-                for row in c.execute('SELECT * FROM items ORDER BY created asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
-                    watches.append(list(row))
-            elif order == 3:
-                for row in c.execute('SELECT * FROM items ORDER BY price asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
-                    watches.append(list(row))
-            elif order == 4:
-                for row in c.execute('SELECT * FROM items ORDER BY price desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
-                    watches.append(list(row))
-            # Populate item_ids with the ids from watches list
-            for row in watches:
-                item_ids.append(row[0])
-            # Select rows from images table if the image is in the watches list (i.e. has the same id as one of the items in watches list)
-            for row in item_ids:
-                for img in c.execute('SELECT * FROM images WHERE item IN (?) ORDER BY date desc', (row,)):
-                    images.append(list(img))
-            num_pages = list(range(1, num_pages + 1))
-        conn.close()
-        return jsonify(watches = watches, images = images, num_pages=num_pages)
-        
-    except Exception as e:
-        print(e)
-        conn.rollback()
-        return redirect('/shop')
-        conn.close()
+                # Get number of pages by deviding the number of listed items and ceil the result.
+                num_pages = math.ceil(num_items / 12)
+
+                # If requested page does not exist, redirect user to "shop" page
+                if page < 1 or page > num_pages or order < 1 or order > 4:
+                    return redirect('/shop')
+                # Select 12 items from items with the offset for the selected page and the selected order
+                if order == 1:
+                    for row in c.execute('SELECT * FROM items ORDER BY created desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                        watches.append(list(row))
+                elif order == 2:
+                    for row in c.execute('SELECT * FROM items ORDER BY created asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                        watches.append(list(row))
+                elif order == 3:
+                    for row in c.execute('SELECT * FROM items ORDER BY price asc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                        watches.append(list(row))
+                elif order == 4:
+                    for row in c.execute('SELECT * FROM items ORDER BY price desc LIMIT 12 OFFSET (?)', ((page - 1) * 12,)):
+                        watches.append(list(row))
+                # Populate item_ids with the ids from watches list
+                for row in watches:
+                    item_ids.append(row[0])
+                # Select rows from images table if the image is in the watches list (i.e. has the same id as one of the items in watches list)
+                for row in item_ids:
+                    for img in c.execute('SELECT * FROM images WHERE item IN (?) ORDER BY date desc', (row,)):
+                        images.append(list(img))
+                num_pages = list(range(1, num_pages + 1))
+            conn.close()
+            return jsonify(watches = watches, images = images, num_pages=num_pages, brands = brands)
+            
+        except Exception as e:
+            print(e)
+            conn.rollback()
+            return redirect('/shop')
+            conn.close()
 
 @app.route("/sell", methods=['GET', 'POST'])
 def sell():

@@ -1,3 +1,9 @@
+/* Logo */
+.bi-stopwatch {
+    margin-right: -2px;
+    margin-bottom: -2px;
+}
+
 .nav a {
     text-decoration: none !important;
 }
@@ -62,12 +68,25 @@
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) { 
+    .login-nav {
+        margin-top: 2.6rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 300;
+    }
+    .navbar-brand {
+        font-size: 2rem;
+    }
+
+    .search-bar {
+        height: 2.8rem;
+        font-size: 1.4rem;
+    }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .navbar-brand {
-        margin-right: 7rem;
+        margin-right: 4.5rem;
 }
 }
 

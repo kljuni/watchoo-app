@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Watches } from './Watches';
-import { Form, Button, Col } from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Pages } from './Pagination';
+import { Filter } from './Filter';
 
 function App() {
     const [watches, setWatches] = useState([]);
@@ -11,15 +12,23 @@ function App() {
     const [cur_page, setCur_page] = useState(1);
     const [loading, setLoading] = useState(true);
     const [showMore, setShowMore] = useState(true);
+    const [brands, setBrands] = useState([]);
+    const [gender, setGender] = useState("");
+    const [category, setCategory] = useState("");
+    const [brand, setBrand] = useState("");
+    const [submit, setSubmit] = useState(0);
+
 
     useEffect(() => {
-        fetch('/api/shop/' + order + '/' + cur_page)
+        // console.log('/api/shop/' + order + '/' + cur_page + '?arg1=' + gender + '&arg2=' + category + '&arg3=' + brand)
+        fetch('/api/shop/' + order + '/' + cur_page + '?arg1=' + encodeURIComponent(gender) + '&arg2=' + encodeURIComponent(category) + '&arg3=' + encodeURIComponent(brand))
         .then(response => response.json()
         .then(data => {
             setWatches(data.watches);
             setImages(data.images);
             setNum_pages(data.num_pages);
             setLoading(false);
+            setBrands(data.brands);
         }))
     }, [order, cur_page]);
 
@@ -39,7 +48,7 @@ function App() {
 
     const Sorting = () => {
         return (
-        <div className="my-3">
+        <div className="mt-4">
             {showMore ? null : (
                 <Form.Group>
                     <Form.Row>
@@ -75,12 +84,63 @@ function App() {
         )
       }
 
+    const changeFilter = (x,y) => {
+        if (x == 0) {
+            console.log(y);
+            if (gender == y) {
+                setGender('');
+                document.getElementById("radioButtonID").checked = false;
+            }
+            setGender(y);
+            console.log(gender + " is now")
+        }
+        else if (x == 1) {
+            console.log(y);
+            setCategory(y);
+        }
+        else if (x == 2) {
+            console.log(y);
+            setBrand(y);
+        }
+    }
+
+    const close = () => {
+        document.getElementById("myNavo").style.display = "none"
+    }
+
+    const open = () => {
+        document.getElementById("myNavo").style.display = "block"
+    }
+
+    const submitForm = (event) => {
+        event.preventDefault()
+        fetch('/api/shop/' + order + '/' + cur_page + '?arg1=' + gender + '&arg2=' + category + '&arg3=' + brand)
+        .then(response => response.json()
+        .then(data => {
+            setWatches(data.watches);
+            setImages(data.images);
+            // setNum_pages(data.num_pages);
+            // setLoading(false);
+            // setBrands(data.brands);
+        }))
+        document.getElementById("myNavo").style.display = "none";
+    }
+
     return (
-        <div>
-            <Sorting />
-            <Watches watches={watches} images={images} loading={loading}/>
-            <More />
-        </div>
+        <Container>
+            <Row>
+                <Col xs={0} md={2}>
+                </Col>
+                <Col xs={12} md={7}>
+                    <Sorting />
+                    <Watches watches={watches} images={images} loading={loading} open={open} />
+                    <More />
+                </Col>
+                <Col xs={12} md={3}>
+                    <Filter brands={brands} loading={loading} changeFilter={changeFilter} useEffect={useEffect} submitForm={submitForm} close={close} />
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
