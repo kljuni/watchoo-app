@@ -127,16 +127,16 @@ function App() {
     }
 
     return (
-        <Container>
+        <Container className="px-0">
             <Row>
-                <Col xs={0} md={2}>
+                <Col className="px-0" xs={0} md={2}>
                 </Col>
-                <Col xs={12} md={7}>
+                <Col className="px-0" xs={12} md={7}>
                     <Sorting />
                     <Watches watches={watches} images={images} loading={loading} open={open} />
                     <More />
                 </Col>
-                <Col xs={12} md={3}>
+                <Col className="px-0" xs={12} md={3}>
                     <Filter brands={brands} loading={loading} changeFilter={changeFilter} useEffect={useEffect} submitForm={submitForm} close={close} />
                 </Col>
             </Row>
