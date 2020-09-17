@@ -58,7 +58,13 @@
     color: rgba(0,0,0,.5);
 }
 
+.navbar-brand {
+    font-size: 1.6rem;
+}
+
 /* // Extra small devices (portrait phones, less than 576px)
+
+
 
 // No media query since this is the default in Bootstrap */
 
@@ -73,6 +79,7 @@
         font-size: 1.1rem !important;
         font-weight: 300;
     }
+
     .navbar-brand {
         font-size: 2rem;
     }

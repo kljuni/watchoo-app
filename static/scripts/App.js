@@ -16,7 +16,7 @@ function App() {
     const [gender, setGender] = useState("");
     const [category, setCategory] = useState("");
     const [brand, setBrand] = useState("");
-    const [submit, setSubmit] = useState(0);
+    const [submit, setSubmit] = useState(1);
 
 
     useEffect(() => {
@@ -78,8 +78,10 @@ function App() {
         }
         return (
           <div className="d-flex justify-content-center">
-            { showMore ? <Button className="text-center my-5" variant="secondary" onClick={onClick}>Show more »</Button> : 
-            <Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/> }
+            {submit ? ( 
+                showMore ? (<Button id="pagination" className="text-center my-5" variant="secondary" onClick={onClick}>Show more »</Button>) : 
+            (<Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/>)) : null
+            }
           </div>
         )
       }
@@ -124,6 +126,7 @@ function App() {
             // setBrands(data.brands);
         }))
         document.getElementById("myNavo").style.display = "none";
+        setSubmit(0)
     }
 
     return (
