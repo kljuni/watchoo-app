@@ -494,13 +494,20 @@ def sell():
                             # Open the image with Pillow "Image" class
                             im = Image.open(image)
 
-                            # Compress the image to aribitrary quality, here set to 30
-                            im.save(filename, optimize=True, quality=5) 
-                            print("new commit was done")
-                            # Save image to file system
-                            im.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+                            # Convert the image to JPG and replace the background color to white if the image is PNG
+                            fill_color = (255, 255, 255)  # your new background color
 
-                            cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
+                            im = im.convert("RGBA")   # it had mode P after DL it from OP
+
+                            if im.mode in ('RGBA', 'LA'):
+                                background = Image.new(im.mode[:-1], im.size, fill_color)
+                                background.paste(im, im.split()[-1]) # omit transparency
+                                im = background
+
+                            # Save image to file system and compress the image to aribitrary quality, here set to 20
+                            im.convert('RGB').save(os.path.join(app.config["IMAGE_UPLOADS"], filename) + '.jpg', 'JPEG', optimize=True, quality=20)
+
+                            cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename + '.jpg')))
                         else: 
                             raise NameError('Wrong image format')
 
