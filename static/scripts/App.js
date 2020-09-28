@@ -121,12 +121,12 @@ function App() {
         .then(data => {
             setWatches(data.watches);
             setImages(data.images);
+            setSubmit(0);
             // setNum_pages(data.num_pages);
             // setLoading(false);
             // setBrands(data.brands);
         }))
         document.getElementById("myNavo").style.display = "none";
-        setSubmit(0)
     }
 
     return (
