@@ -1,3 +1,13 @@
+.nav-men {
+    font-weight: 400;
+    color: #81949c !important;
+    font-size: 1rem;
+}
+
+/* Add white space below content and above footer */
+.footer-space {
+    height: 7rem;
+}
 /* Logo */
 .bi-stopwatch {
     margin-right: -2px;

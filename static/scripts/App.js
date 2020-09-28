@@ -80,7 +80,8 @@ function App() {
           <div className="d-flex justify-content-center">
             {submit ? ( 
                 showMore ? (<Button id="pagination" className="text-center my-5" variant="secondary" onClick={onClick}>Show more »</Button>) : 
-            (<Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/>)) : null
+            (<Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/>)) : (watches.length > 1 ?
+            (<div className="alert alert-light text-center mt-4" role="alert">Not what you are looking for? Try a different <u onClick={open}>filter selection.</u></div>) : null)
             }
           </div>
         )
@@ -130,12 +131,16 @@ function App() {
     }
 
     return (
-        <Container className="px-0">
-            <Row>
+        <Container className="px-0">            
+            <Row>              
                 <Col className="px-0" xs={0} md={2}>
                 </Col>
                 <Col className="px-0" xs={12} md={7}>
                     <Sorting />
+                    {/* Display the number of items matching the filter criteria */}
+            { submit ? null : (
+                    (watches.length == 1) ? (<div className="mt-3 mx-2"><b>1</b> result</div>) : (<div className="mt-3 mx-2"><b>{watches.length}</b> results</div>))
+            }
                     <Watches watches={watches} images={images} loading={loading} open={open} />
                     <More />
                 </Col>

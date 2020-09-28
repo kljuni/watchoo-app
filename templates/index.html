@@ -5,38 +5,48 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center display-4 mt-4 mt-md-5 mb-sm-0 mb-md-5">
-        {{ user }}
-    </h1>
+    <div class="d-md-none">
+        <hr>
+        <p class="text-center lead">
+            {{ user }}
+        </p>
+        <hr>
+    </div>
     <div class="row justify-content-md-center mt-md-4">
         <div class="card-deck">
-            <div class="card mr-1 ml-md-5">
-              <div class="card-body d-none d-md-block">
+            <div class="card mr-1 ml-md-5 d-none d-md-block">
+              <div class="card-body">
                 <h5 class="card-title">Who are we?</h5>
                 <p class="card-text desc-card text-muted">A love for watch collecting enthusiasm blended with the wish to digitalize the pre-owned market gave birth to this community.</p>
               </div>
             </div>
-            <div class="card mx-1">
-              <div class="card-body d-none d-md-block">
+            <div class="card mx-1 d-none d-md-block">
+              <div class="card-body">
                 <h5 class="card-title">How to sell?</h5>
                 <p class="card-text desc-card text-muted">Selling on Watchoo is very simple, first please <a href="/register" class="text-muted">register</a> as a user. And then simply <a href="/sell" class="text-muted">sell your watch</a>.</p>
               </div>
             </div>
-            <div class="card ml-1 mr-md-5">
-              <div class="card-body d-none d-md-block">
+            <div class="card ml-1 mr-md-5 d-none d-md-block">
+              <div class="card-body">
                 <h5 class="card-title">How to buy?</h5>
                 <p class="card-text desc-card text-muted">Visit the <a href="/shop" class="text-muted">shop</a> section where you can logically sort the listings and do specific searches using the provided categories.</p>
               </div>
             </div>
-          </div>
+        </div>
         
         <div class="list-group col-md-8 px-0">
             
 
             {% for row in watches %}            
                 {% if loop.index == 1 %}
-                    <p class="text-center lead mb-4 mt-md-4">CHECK OUT THE LAST ADDED WATCHES</p>
+                    <a href="#watches" class="text-reset text-decoration-none text-center lead mb-0 mt-md-4">Check out the last added watches
+                        <br>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-compact-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                      </svg>            
+                    </a>
                 {% endif %}
+            <span id="watches"></span>
             <a href="{{ url_for('watch', item_id = row[0]) }}" class="list-group-item list-group-item-action align-items-start h-oglas mt-2">
                 <div class="row">
                     <img src="/static/images/newlisting.png" class="left-top-corner" alt="New listing">
@@ -151,4 +161,47 @@
     <div class="text-center">
         <a class="btn btn-secondary my-5" href="/shop" role="button">Show more »</a>
     </div>
+
+
+{% endblock %}
+
+{% block script %}
+<script>
+    // Select all links with hashes
+    $('a[href*="#"]')
+    // Remove links that don't actually link to anything
+    .not('[href="#"]')
+    .not('[href="#0"]')
+    .click(function(event) {
+        // On-page links
+        if (
+        location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
+        && 
+        location.hostname == this.hostname
+        ) {
+        // Figure out element to scroll to
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        // Does a scroll target exist?
+        if (target.length) {
+            // Only prevent default if animation is actually gonna happen
+            event.preventDefault();
+            $('html, body').animate({
+            scrollTop: target.offset().top
+            }, 1000, function() {
+            // Callback after animation
+            // Must change focus!
+            var $target = $(target);
+            $target.focus();
+            if ($target.is(":focus")) { // Checking if the target was focused
+                return false;
+            } else {
+                $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
+                $target.focus(); // Set focus again
+            };
+            });
+        }
+        }
+    });
+</script>
 {% endblock %}
