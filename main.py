@@ -191,11 +191,11 @@ def register():
         except Exception as e:
             print(e)
             con.rollback()
-            return render_template("/register.html", msg = e)
+            return render_template("/register.html", msg = e, countryList = countryList)
             con.close()
         except:
             con.rollback()
-            return render_template("/register.html", msg = "There was an error in database")
+            return render_template("/register.html", msg = "There was an error in database", countryList = countryList)
             con.close()
     else:
         return render_template("register.html", countryList = countryList)
@@ -446,7 +446,7 @@ def watches_list(order, page):
 def sell():
     if session.get("user_id") is None:
         reg = "Please register before posting a new listing"
-        return render_template("register.html", reg=reg)
+        return render_template("register.html", reg=reg, countryList = countryList)
 
     if request.method == 'POST':
         print(request)
@@ -573,7 +573,7 @@ def account(id_num=0):
     if request.method == 'DELETE':
         if session.get("user_id") is None:
             reg = "Please register before accessing your account"
-            return render_template("register.html", reg=reg)
+            return render_template("register.html", reg=reg, countryList = countryList)
         try:
             with sql.connect("mydb.db") as conn:
                 c = conn.cursor()
@@ -597,7 +597,7 @@ def account(id_num=0):
     else:
         if session.get("user_id") is None:
             reg = "Please register before accessing your account"
-            return render_template("register.html", reg=reg)
+            return render_template("register.html", reg=reg, countryList = countryList)
         try:
             with sql.connect("mydb.db") as conn:
                 c = conn.cursor()
@@ -625,7 +625,7 @@ def del_item(item_id):
     if request.method == 'DELETE':
         if session.get("user_id") is None:
             reg = "Please register before accessing your data"
-            return render_template("register.html", reg=reg)
+            return render_template("register.html", reg=reg, countryList = countryList)
         try:
             with sql.connect("mydb.db") as conn:
                 c = conn.cursor()

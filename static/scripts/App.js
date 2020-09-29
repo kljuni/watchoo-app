@@ -49,7 +49,7 @@ function App() {
     const Sorting = () => {
         return (
         <div className="mt-4">
-            {showMore ? null : (
+            {showMore ? null : submit ? (
                 <Form.Group>
                     <Form.Row>
                         <Col>
@@ -65,7 +65,7 @@ function App() {
                         </Col>
                     </Form.Row>
                 </Form.Group>
-            )}
+            ) : null}
         </div>
         )
     } 
@@ -89,20 +89,12 @@ function App() {
 
     const changeFilter = (x,y) => {
         if (x == 0) {
-            console.log(y);
-            if (gender == y) {
-                setGender('');
-                document.getElementById("radioButtonID").checked = false;
-            }
             setGender(y);
-            console.log(gender + " is now")
         }
         else if (x == 1) {
-            console.log(y);
             setCategory(y);
         }
         else if (x == 2) {
-            console.log(y);
             setBrand(y);
         }
     }

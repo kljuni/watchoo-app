@@ -99,8 +99,8 @@ export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => 
                                                     <label className="custom-control-label" htmlFor="categoryRadio7">Dress watch</label>
                                                 </div>
                                                 <div className="custom-control custom-radio">
-                                                    <input type="radio" onClick={e => changeFilter(1, "Other")} value="Other" id="categoryRadio7" name="category" className="custom-control-input"></input>
-                                                    <label className="custom-control-label" htmlFor="categoryRadio7">Other</label>
+                                                    <input type="radio" onClick={e => changeFilter(1, "Other")} value="Other" id="categoryRadio8" name="category" className="custom-control-input"></input>
+                                                    <label className="custom-control-label" htmlFor="categoryRadio8">Other</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -216,8 +216,8 @@ export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => 
                                                 <label className="custom-control-label" htmlFor="categoryRadio7">Dress watch</label>
                                             </div>
                                             <div className="custom-control custom-radio">
-                                                <input type="radio" onClick={e => changeFilter(1, "Other")} value="Other" id="categoryRadio7" name="category" className="custom-control-input"></input>
-                                                <label className="custom-control-label" htmlFor="categoryRadio7">Other</label>
+                                                <input type="radio" onClick={e => changeFilter(1, "Other")} value="Other" id="categoryRadio8" name="category" className="custom-control-input"></input>
+                                                <label className="custom-control-label" htmlFor="categoryRadio8">Other</label>
                                             </div>
                                         </div>
                                     </div>
