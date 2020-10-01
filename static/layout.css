@@ -70,6 +70,7 @@
 
 .navbar-brand {
     font-size: 1.8rem;
+    margin-top: 0.5rem;
 }
 
 /* // Extra small devices (portrait phones, less than 576px)
@@ -92,6 +93,7 @@
 
     .navbar-brand {
         font-size: 2rem;
+        margin-top: 1.3rem;
     }
 
     .search-bar {

@@ -51,12 +51,12 @@
                                 <b class="my-0">Brand:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <input type="text" list="brand" name="brand" class="form-control" required/>
-                                    <datalist id="brand">
-                                        {% for el in watchBrands %}
+                                <select name="brand" class="form-control" id="exampleFormControlSelect1" required>
+                                    <option value="" selected disabled>Please choose</option>
+                                    {% for el in watchBrands %}
                                         <option value="{{ el }}">{{ el }}</option>   
-                                        {% endfor %}
-                                    </datalist>
+                                    {% endfor %}
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -96,8 +96,8 @@
                                 <b class="my-0">Condition:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <select name="condition" class="form-control" id="exampleFormControlSelect1">
-                                    <option selected disabled>Please choose</option>
+                                <select name="condition" class="form-control" id="exampleFormControlSelect1" required>
+                                    <option value="" selected disabled>Please choose</option>
                                     <option>Unworn (Mint condition, without signs of wear) </option>
                                     <option>Good (Light signs of wear or scratches)</option>
                                     <option>Fair (Obvious signs of wear or scratches)</option>
@@ -113,8 +113,8 @@
                                 <b class="my-0">Gender:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <select name="gender" class="form-control" id="exampleFormControlSelect1">
-                                    <option selected disabled>Please choose</option>
+                                <select name="gender" class="form-control" id="exampleFormControlSelect1" required>
+                                    <option value="" selected disabled>Please choose</option>
                                     <option>Men's watch/Unisex</option>
                                     <option>Women's watch</option>
                                 </select>
@@ -137,8 +137,8 @@
                                 <b class="my-0">Movement:</b>
                             </div>
                             <div class="col-md-10 mx-md-auto">
-                                <select name="movement" class="form-control" id="exampleFormControlSelect1">
-                                    <option selected disabled>Please choose</option>
+                                <select name="movement" class="form-control" id="exampleFormControlSelect1" required>
+                                    <option value="" selected disabled>Please choose</option>
                                     <option>Automatic</option>
                                     <option>Manual winding</option>
                                     <option>Quartz</option>

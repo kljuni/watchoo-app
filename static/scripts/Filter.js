@@ -1,6 +1,7 @@
 import React from 'react';
 import '../shop.css';
 import {isMobile} from 'react-device-detect';
+import Skeleton from '@yisheng90/react-loading';
 
 export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => {
     // let brand_list = [];
@@ -20,7 +21,7 @@ export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => 
             <div id="myNavo" class="overlay-o">
             <a href="javascript:void(0)" class="closebtn-o" onClick={close}>&times;</a>
                 <div class="overlay-content-o">
-                {loading ? (<h5 className="text-center">Loading...</h5>) : (<div>
+                {loading ? (<Skeleton className="mt-4" width="100%" height="6rem" />) : (<div>
                     {[1].map(x => {
     
                         const brand_list = brands.map((x, i) => {
@@ -137,7 +138,7 @@ export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => 
     }
     return (
         <div>
-            {loading ? (<h5 className="text-center">Loading...</h5>) : (<div>
+            {loading ? (<Skeleton className="mt-4" width="100%" height="6rem" />) : (<div className="ml-md-2" >
                 {[1].map(x => {
 
                     const brand_list = brands.map((x, i) => {

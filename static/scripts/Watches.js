@@ -1,11 +1,20 @@
 import React from 'react';
 import { Card, Alert } from 'react-bootstrap';
 import '../shop.css';
+import Skeleton from '@yisheng90/react-loading';
 
 export const Watches = ({ watches, images, loading, open }) => {
     return (
         <div>
-            {loading ? (<h5 className="text-center">Loading...</h5>) : (
+            {loading ? (
+            <div>
+                <Skeleton width="100%" height="9rem" />
+                <Skeleton width="100%" height="9rem" />
+                <Skeleton width="100%" height="9rem" />
+                <Skeleton width="100%" height="9rem" />
+                <Skeleton width="100%" height="9rem" />
+            </div>            
+            ) : (
             watches.length == 0 ? (
                 <div>
                     {
@@ -59,7 +68,7 @@ export const Watches = ({ watches, images, loading, open }) => {
                                         <div className="col-12 col-md-auto">
                                             <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-geo-alt mb-1 mr-1" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                 <path fillRule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                                            </svg> Ljubljana 
+                                            </svg> {watch[13]}
                                         </div>                         
                                     </div>
                                     <div className="small mt-4 d-none d-md-flex">
