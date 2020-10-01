@@ -1,6 +1,11 @@
 /* // Extra small devices (portrait phones, less than 576px) */
 /* // No media query since this is the default in Bootstrap */
 
+/* Add white space before loading React component */
+.react-space {
+    height: 100rem;
+}
+
 .desc-card a {
     color: black;
     text-decoration: underline;

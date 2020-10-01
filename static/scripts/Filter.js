@@ -4,18 +4,6 @@ import {isMobile} from 'react-device-detect';
 import Skeleton from '@yisheng90/react-loading';
 
 export const Filter = ({ brands, loading, changeFilter, submitForm, close }) => {
-    // let brand_list = [];
-    // if (loading == true) {
-    //     brand_list = <div>Loading...</div>
-    // }
-    // else {
-    //     brand_list = brands.map((x, i) => {
-    //         <div key={x} className="custom-control custom-radio">
-    //             <input type="radio" value={x} id={ "brandRadio" + i.toString()} name="brand" className="custom-control-input"></input>
-    //             <label className="custom-control-label" for={ "brandRadio" + i.toString()}>{ x }</label>
-    //         </div>
-    //     })
-    // }
     if (isMobile) {
         return (
             <div id="myNavo" class="overlay-o">

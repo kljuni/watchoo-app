@@ -20,7 +20,6 @@ function App() {
 
 
     useEffect(() => {
-        // console.log('/api/shop/' + order + '/' + cur_page + '?arg1=' + gender + '&arg2=' + category + '&arg3=' + brand)
         fetch('/api/shop/' + order + '/' + cur_page + '?arg1=' + encodeURIComponent(gender) + '&arg2=' + encodeURIComponent(category) + '&arg3=' + encodeURIComponent(brand))
         .then(response => response.json()
         .then(data => {
@@ -115,9 +114,6 @@ function App() {
             setWatches(data.watches);
             setImages(data.images);
             setSubmit(0);
-            // setNum_pages(data.num_pages);
-            // setLoading(false);
-            // setBrands(data.brands);
         }))
         document.getElementById("myNavo").style.display = "none";
     }

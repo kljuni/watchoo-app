@@ -274,15 +274,8 @@ def shop():
             c = conn.cursor()
             watches = []
             global brands
-            # images = []
-            # brands = []
             for row in c.execute('SELECT * FROM items ORDER BY created desc'):
                 watches.append(list(row))
-            # for row in c.execute('SELECT * FROM images ORDER BY date desc'):
-            #     images.append(list(row))
-            # for row in watches: 
-            #     if row[1] not in brands:
-            #         brands.append(row[1])
         return render_template("shop.html", watches=watches, brands=brands)
         conn.close()
 
@@ -481,12 +474,6 @@ def sell():
                         if image.filename == "":
                             return render_template("/sell.html", msg = "Selected image has no name")
 
-                        # Check if the inputed file is not an image
-                        # if not image.filename:
-                        #     con.rollback()
-                        #     return render_template("/sell.html", msg = "Please input photos in JPEG, JPG, PNG or GIF extension")
-                        #     con.close()
-
                         if allowed_image(image.filename):
                             print("it gets here 2")
                             filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
@@ -513,26 +500,7 @@ def sell():
 
                 cur.execute("INSERT INTO items (brand, model, condition, gender, year, movement, price, description, location, created, item_owner, category) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", (brand, model, condition, gender, year, movement, price, description, location, created, session["user_id"], category))
                 con.commit()
-                
-                # # image = request.files['input-fa[]']
-                # # print(image)
-                # item_id = [lis[0] for lis in file_entry][0]
 
-                # # Flask image upload procedure from https://pythonise.com/series/learning-flask/flask-uploading-files
-                # if image:                
-                #     # Check if the image has a name
-                #     if image.filename == "":
-                #         return render_template("/sell.html", msg = "Selected image has no name")
-
-                #     if allowed_image(image.filename):
-                #         filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
-  
-                #         image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-
-
-                #     cur.execute("INSERT INTO images (item, user, date, path) VALUES (?,?,?,?)", (item_id, session["user_id"], created, "/static/images/{}".format(filename)))
-
-            
             con.commit()
 
             # return render_template("watch.html", item_id = item_id)
@@ -584,9 +552,6 @@ def account(id_num=0):
                     watches.append(list(row))
                 for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
                     images.append(list(row))
-                # for row in watches: 
-                #     if row[1] not in brands:
-                #         brands.append(row[1])
             return render_template("account.html", watches=watches, images=images)
             conn.close()
         except Exception as e:
@@ -608,9 +573,6 @@ def account(id_num=0):
                     watches.append(list(row))
                 for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
                     images.append(list(row))
-                # for row in watches: 
-                #     if row[1] not in brands:
-                #         brands.append(row[1])
             return render_template("account.html", watches=watches, images=images)
             conn.close()
         except Exception as e:
