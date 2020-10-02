@@ -20,11 +20,6 @@ import glob
 
 app = Flask(__name__)
 
-
-# from blueprints import main
-# app.register_blueprint(main)
-
-
 DATABASE = 'mydb.db'
 
 # Set the filesystem folder for saving uploaded images
@@ -144,7 +139,6 @@ def login():
             
             #  Query the db for the user email
             user = query_db('select * from users where email = ?', [email], one=True)
-            print(user)
 
             # Ensure user (email) exists and the password is correct
             if user is None or check_password_hash(user[4], request.form.get("password")) == False:
@@ -154,8 +148,6 @@ def login():
             session["user_id"] = user[0]
             session["email"] = user[3]
 
-        print(session)
-        print("here it is printed _______________")
         return redirect("/")
     else:
         return render_template("login.html")
@@ -182,7 +174,6 @@ def register():
                 
                 if check(email) == False:
                     raise Exception("Invalid email")
-                print("all good")
                 con.commit()
                 msg = "Record successfully added"
 
@@ -242,10 +233,8 @@ def index():
 
 @app.route("/api/search")
 def search():
-    print(request.args)
     try:            
         search = request.args["arg1"]
-        print(search)
         with sql.connect("mydb.db") as conn:
             c = conn.cursor()
             items = []
@@ -259,11 +248,7 @@ def search():
                 image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
                 for img in image:
                     images.append(list(img))
-            print(items)
-            print(images)
-            print("up there you can find em")
             global brands
-            print(brands)
         return jsonify(watches = items, images = images, brands = brands, num_pages=3)
         conn.close()
     except Exception as e:
@@ -299,10 +284,6 @@ def categories():
             # gender = request.form["gender"]
             category = request.form["category"]
             brand = request.form["brand"]
-            print("here the brands")
-            print(gender)
-            print(category)
-            print(brand)
             if gender == None:
                 gender = ''
             if category == None:
@@ -322,9 +303,6 @@ def categories():
                 image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
                 for img in image:
                     images.append(list(img))
-        print("printing items")
-        print(list_items)
-        print(items)
         return render_template("shop.html", watches=list_items)
         conn.close()
 
@@ -340,31 +318,21 @@ def testing():
 
 @app.route('/api/shop/<int:order>/<int:page>')
 def watches_list(order, page):
-    print(request.args)
     arg1 = request.args["arg1"]
     arg2 = request.args["arg2"]
     arg3 = request.args["arg3"]
-    print("here printing args")
-    print(arg1)
-    print(arg2)
-    print(arg3)
     if (arg1 or arg2 or arg3):
         try:
             with sql.connect("mydb.db") as conn:
                 gender = request.args["arg1"]
                 category = request.args["arg2"]
                 brand = request.args["arg3"]
-                print("here the brands")
-                print(gender)
-                print(category)
-                print(brand)
                 if gender == None:
                     gender = ''
                 if category == None:
                     category = ''
                 if brand == None:
                     brand = ''
-                print("hallelujah")
                 c = conn.cursor()            
                 items = []
                 list_items = []
@@ -376,10 +344,7 @@ def watches_list(order, page):
                 for item in list_items:
                     image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
                     for img in image:
-                        images.append(list(img))
-                print("printing items")
-                print(list_items)
-                print(items)            
+                        images.append(list(img))            
             global brands
             return jsonify(watches = items, images = images, brands = brands)
             conn.close()
@@ -445,7 +410,6 @@ def sell():
         return render_template("register.html", reg=reg, countryList = countryList)
 
     if request.method == 'POST':
-        print(request)
         try:            
             brand = request.form.get("brand")
             model = request.form.get("model")
@@ -466,19 +430,14 @@ def sell():
                 # Save uploaded image to image. 
                 # Save the uploaded item_id
                 uploaded_files = request.files.getlist("input-fas[]")
-                print(uploaded_files)
                 item_id = [lis[0] for lis in file_entry][0] + 1
                 for image in uploaded_files:
-                    print("here is the image")
-                    print(image)
                     if image:                
                         # Check if the image has a name
-                        print("it gets here 1")
                         if image.filename == "":
                             return render_template("/sell.html", msg = "Selected image has no name")
 
                         if allowed_image(image.filename):
-                            print("it gets here 2")
                             filename = ''.join(random.choices(string.ascii_lowercase + string.ascii_uppercase + string.digits, k=8)) + secure_filename(image.filename) 
                             
                             # Open the image with Pillow "Image" class
@@ -511,7 +470,6 @@ def sell():
             con.close()
 
         except Exception as e:
-            print("some success end")
             print(e)
             con.rollback()
             return render_template("/sell.html", msg = e)
@@ -533,8 +491,6 @@ def watch(item_id):
             watch.append(list(row))
         for row in c.execute('SELECT * FROM images WHERE images.item == ?', (item_id,)):
             image.append(list(row))
-        print(watch)
-        print(image)
         return render_template('watch.html', item_id = item_id, watch=watch, image=image)
         conn.close()
 
@@ -637,7 +593,6 @@ def del_item(item_id):
                 user = session.get("user_id")
                 c.execute('DELETE FROM items WHERE item_id=?', (item_id,))
                 c.execute('DELETE FROM images WHERE item=?', (item_id,))
-            print("that was a success, congrats !!!")
             conn.close()
             return redirect('/account')
         except Exception as e:
