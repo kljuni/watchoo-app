@@ -240,49 +240,52 @@ def index():
             return redirect('/')
             conn.close()
 
-@app.route("/search", methods=['GET', 'POST'])
+@app.route("/api/search")
 def search():
-    if request.method == 'POST':
-        try:            
-            search = request.form.get("search")
-            with sql.connect("mydb.db") as conn:
-                c = conn.cursor()
-                items = []
-                list_items = []
-                images = []
-                for row in c.execute("SELECT * FROM items WHERE items.brand LIKE '%'||?||'%' OR items.model LIKE '%'||?||'%' OR items.description LIKE '%'||?||'%' ORDER BY created desc", (search, search, search)):
-                    items.append(list(row))
-                for item in items:
-                    list_items.append(item[0])
-                for item in list_items:
-                    image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
-                    for img in image:
-                        images.append(list(img))
-                return render_template('shop.html', watches=items, images=images, search=search)
-                conn.close()
-
-        except Exception as e:
-            print(e)
-            conn.rollback()
-            return redirect('/shop')
-            conn.close()
-
-@app.route("/shop")
-def shop():
-    try:
+    print(request.args)
+    try:            
+        search = request.args["arg1"]
+        print(search)
         with sql.connect("mydb.db") as conn:
             c = conn.cursor()
-            watches = []
+            items = []
+            list_items = []
+            images = []
+            for row in c.execute("SELECT * FROM items WHERE items.brand LIKE '%'||?||'%' OR items.model LIKE '%'||?||'%' OR items.description LIKE '%'||?||'%' ORDER BY created desc", (search, search, search)):
+                items.append(list(row))
+            for item in items:
+                list_items.append(item[0])
+            for item in list_items:
+                image = query_db('SELECT * FROM images WHERE images.item=? ORDER BY date desc', (item,))
+                for img in image:
+                    images.append(list(img))
+            print(items)
+            print(images)
+            print("up there you can find em")
             global brands
-            for row in c.execute('SELECT * FROM items ORDER BY created desc'):
-                watches.append(list(row))
-        return render_template("shop.html", watches=watches, brands=brands)
+            print(brands)
+        return jsonify(watches = items, images = images, brands = brands, num_pages=3)
+        conn.close()
+    except Exception as e:
+        print(e)
+        conn.rollback()
+        return redirect('/shop')
         conn.close()
 
-    except Exception as e:
-        conn.rollback()
-        return redirect('/')
-        conn.close()
+@app.route("/shop", defaults={'search': None}, methods=['GET', 'POST'])
+def shop(search):
+    if request.method == 'POST':
+        if request.form:
+            if "search1" in request.form: 
+                search=request.form["search1"]
+            elif "search2" in request.form:  
+                search=request.form["search2"]
+            elif "search3" in request.form:  
+                search=request.form["search3"]
+            elif "search4" in request.form:  
+                search=request.form["search4"]
+            return render_template("shop.html", search=search)
+    return render_template("shop.html")
 
 @app.route("/shop/categories", methods=['POST'])
 def categories():
@@ -535,9 +538,10 @@ def watch(item_id):
         return render_template('watch.html', item_id = item_id, watch=watch, image=image)
         conn.close()
 
-@app.route("/account", methods=['GET', 'DELETE'])
+# form_id is meant to know which form is being submitted, form_id=1 is firstname, secondname etc form. Form_id=2 is password change.
+@app.route("/account", methods=['GET', 'POST', 'DELETE'])
 @login_required
-def account(id_num=0):
+def account():
     if request.method == 'DELETE':
         if session.get("user_id") is None:
             reg = "Please register before accessing your account"
@@ -552,12 +556,51 @@ def account(id_num=0):
                     watches.append(list(row))
                 for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
                     images.append(list(row))
-            return render_template("account.html", watches=watches, images=images)
-            conn.close()
+            return render_template("account.html", watches=watches, images=images, countryList = countryList)
         except Exception as e:
             conn.rollback()
             print(e)
             return redirect('/')
+        conn.close()
+    elif request.method == 'POST':
+        if session.get("user_id") is None:
+            reg = "Please register before accessing your account"
+            return render_template("register.html", reg=reg, countryList = countryList)
+        if "firstname" in request.form: 
+            try:
+                with sql.connect("mydb.db") as conn:
+                    c = conn.cursor()
+                    firstname = request.form.get("firstname") 
+                    secondname = request.form.get("secondname") 
+                    email = request.form.get("email") 
+                    country = request.form.get("country") 
+                    user = session.get("user_id")
+                    c.execute('UPDATE users SET firstname = ?, secondname = ?, email = ?, country = ?  WHERE user_id = ?', (firstname, secondname, email, country, user))
+                    msg = "You have successfully changed your personal information!"
+                return render_template('account.html', msg=msg, alert="alert-success", countryList = countryList)
+            except Exception as e:
+                conn.rollback()
+                print(e)
+                return redirect('/')
+            conn.close()
+        elif "current_password" in request.form:        
+            try:
+                with sql.connect("mydb.db") as conn:
+                    c = conn.cursor()
+                    user_id = session.get("user_id")
+                    user_data = query_db('select * from users where user_id = ?', [user_id], one=True)
+                    
+                    # Ensure user exists and the password is correct
+                    if user_data is None or check_password_hash(user_data[4], request.form.get("current_password")) == False:
+                        return render_template("account.html", msg="Wrong current password.", alert="alert-danger", countryList = countryList)
+
+                    c.execute('UPDATE users SET hash = ? WHERE user_id = ?', (generate_password_hash(request.form.get("new_password")), user_id))
+                    msg = "You have successfully changed your password!"
+                return render_template('account.html', msg=msg, alert="alert-success", countryList = countryList)
+            except Exception as e:
+                conn.rollback()
+                print(e)
+                return redirect('/')
             conn.close()
     else:
         if session.get("user_id") is None:
@@ -573,7 +616,7 @@ def account(id_num=0):
                     watches.append(list(row))
                 for row in c.execute('SELECT * FROM images WHERE user=? ORDER BY date desc', (user,)):
                     images.append(list(row))
-            return render_template("account.html", watches=watches, images=images)
+            return render_template("account.html", watches=watches, images=images, countryList=countryList)
             conn.close()
         except Exception as e:
             conn.rollback()

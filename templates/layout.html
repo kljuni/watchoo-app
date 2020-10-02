@@ -27,8 +27,8 @@
                     </svg>Watchoo</a>
 
                     <div class="col-6 col-lg-6 mt-3 mt-md-2 mx-auto d-none d-md-block d-lg-block d-xl-block">
-                        <form action="/search" method="post" class="form-inline md-form form-sm mt-md-4">
-                            <input name="search" class="form-control form-control-sm w-100 search-bar" type="text" placeholder="Search"
+                        <form action="{{ url_for('shop') }}" method="post" class="form-inline md-form form-sm mt-md-4">
+                            <input name="search1" class="form-control form-control-sm w-100 search-bar" type="text" placeholder="Search"
                             aria-label="Search">
                         </form>
                     </div>
@@ -81,8 +81,8 @@
                 </ul>
             </div>
             <div class="col-11 mt-4 mx-auto d-md-none mt-md-2 mb-2 d-lg-none d-xl-none">
-                <form action="/search" method="post" class="form-inline md-form form mt-0">
-                    <input name="search" class="form-control form-control w-100" type="text" placeholder="Search"
+                <form action="{{ url_for('shop') }}"  method="post" class="form-inline md-form form mt-0">
+                    <input name="search2" class="form-control form-control w-100" type="text" placeholder="Search"
                     aria-label="Search" style="border: 1px solid black;">
                 </form>
             </div>
@@ -108,8 +108,8 @@
                             </svg>Watchoo
                         </a>
                         <div class="col-6 col-lg-6 mt-3 mt-md-2 mx-auto d-none d-md-block d-lg-block d-xl-block">
-                            <form action="/search" method="post" class="form-inline md-form form-sm mt-md-4">
-                                <input name="search" class="form-control form-control-sm w-100 search-bar" type="text" placeholder="Search"
+                            <form action="{{ url_for('shop') }}"  method="post" class="form-inline md-form form-sm mt-md-4">
+                                <input name="search3" class="form-control form-control-sm w-100 search-bar" type="text" placeholder="Search"
                                 aria-label="Search">
                             </form>
                         </div>
@@ -161,8 +161,8 @@
                     </ul>
                 </div>
                 <div class="col-11 mt-4 mx-auto d-md-none mt-2 mb-2 d-lg-none d-xl-none">
-                    <form action="/search" method="post" class="form-inline md-form form mt-0">
-                        <input name="search" class="form-control form-control w-100" type="text" placeholder="Search"
+                    <form action="{{ url_for('shop') }}"  method="post" class="form-inline md-form form mt-0">
+                        <input name="search4" class="form-control form-control w-100" type="text" placeholder="Search"
                         aria-label="Search" style="border: 1px solid black;">
                     </form>
                 </div>

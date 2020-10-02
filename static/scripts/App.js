@@ -4,7 +4,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { Pages } from './Pagination';
 import { Filter } from './Filter';
 
-function App() {
+function App({ search }) {
     const [watches, setWatches] = useState([]);
     const [images, setImages] = useState([]);
     const [order, setOrder] = useState(1);
@@ -18,17 +18,31 @@ function App() {
     const [brand, setBrand] = useState("");
     const [submit, setSubmit] = useState(1);
 
+    console.log(search + " works in React!");
 
     useEffect(() => {
-        fetch('/api/shop/' + order + '/' + cur_page + '?arg1=' + encodeURIComponent(gender) + '&arg2=' + encodeURIComponent(category) + '&arg3=' + encodeURIComponent(brand))
-        .then(response => response.json()
-        .then(data => {
-            setWatches(data.watches);
-            setImages(data.images);
-            setNum_pages(data.num_pages);
-            setLoading(false);
-            setBrands(data.brands);
-        }))
+        if (search.length > 0) {
+            fetch('/api/search' + '?arg1=' + encodeURIComponent(search))
+            .then(response => response.json()
+            .then(data => {
+                console.log(data);
+                setWatches(data.watches);
+                setImages(data.images);
+                setNum_pages(data.num_pages);
+                setLoading(false);
+                setBrands(data.brands);
+            }))}
+        else {
+            fetch('/api/shop/' + order + '/' + cur_page + '?arg1=' + encodeURIComponent(gender) + '&arg2=' + encodeURIComponent(category) + '&arg3=' + encodeURIComponent(brand))
+            .then(response => response.json()
+            .then(data => {
+                console.log(data);
+                setWatches(data.watches);
+                setImages(data.images);
+                setNum_pages(data.num_pages);
+                setLoading(false);
+                setBrands(data.brands);
+            }))}
     }, [order, cur_page]);
 
     const changeOrder = (val) => {
@@ -77,7 +91,7 @@ function App() {
         }
         return (
           <div className="d-flex justify-content-center">
-            {submit ? ( 
+            {search ? null : submit ? ( 
                 showMore ? (<Button id="pagination" className="text-center my-5" variant="secondary" onClick={onClick}>Show more »</Button>) : 
             (<Pages changePage={changePage} cur_page={cur_page} loading={loading} num_pages={num_pages}/>)) : (watches.length > 1 ?
             (<div className="alert alert-light text-center mt-4" role="alert">Not what you are looking for? Try a different <u onClick={open}>filter selection.</u></div>) : null)
