@@ -11,5 +11,5 @@ To watch for changes in React code, execute the following command in '/static' f
 ```
 npm run watch
 ```
-  
 
+##### Visit the site at [watchoo.herokuapp.com](https://watchoo.herokuapp.com/)
